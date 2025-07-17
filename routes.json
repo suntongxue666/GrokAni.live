@@ -1,0 +1,23 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "file": "index.html",
+      "description": "Landing page for GrokAni"
+    },
+    {
+      "path": "/stage",
+      "description": "Chat interface from Airi project"
+    },
+    {
+      "path": "/settings",
+      "description": "Settings page for configuring API keys and preferences"
+    }
+  ],
+  "redirects": [
+    {
+      "from": "/chat",
+      "to": "/stage"
+    }
+  ]
+}

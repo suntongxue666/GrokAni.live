@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrokAni - Advanced AI Voice Assistant | Intelligent Conversations</title>
+    <meta name="description"
+        content="GrokAni is a powerful AI voice assistant supporting multiple AI models including GPT, Claude, and Gemini. Experience natural conversations with advanced voice synthesis technology.">
+    <meta name="keywords"
+        content="AI voice assistant, artificial intelligence, voice chat, GPT, Claude, Gemini, voice synthesis, conversational AI">
+    <meta name="author" content="GrokAni Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://grokani.com/">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#6B46C1">
+    <meta name="msapplication-TileColor" content="#6B46C1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GrokAni">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://coin-images.coingecko.com">
+    <link rel="dns-prefetch" href="https://platform.openai.com">
+    <link rel="dns-prefetch" href="https://console.anthropic.com">
+    <link rel="dns-prefetch" href="https://makersuite.google.com">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="GrokAni - Advanced AI Voice Assistant">
+    <meta property="og:description"
+        content="Experience natural conversations with our advanced AI voice assistant supporting multiple AI models.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://grokani.com/">
+    <meta property="og:image"
+        content="https://coin-images.coingecko.com/coins/images/67370/large/m69hOU76_400x400.jpg?1752574248">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GrokAni - Advanced AI Voice Assistant">
+    <meta name="twitter:description"
+        content="Experience natural conversations with our advanced AI voice assistant supporting multiple AI models.">
+    <meta name="twitter:image"
+        content="https://coin-images.coingecko.com/coins/images/67370/large/m69hOU76_400x400.jpg?1752574248">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+    <link rel="apple-touch-icon"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <img src="https://i.imgur.com/TZe9vge.png" alt="GrokAni Logo"
+                        style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <span class="brand-name">GrokAni</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#models" class="nav-link">AI Models</a>
+                <a href="#setup" class="nav-link">Setup</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+            <div class="nav-mobile">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Experience the Future of AI Voice Conversations</h1>
+                <p class="hero-subtitle">GrokAni brings you natural, intelligent voice interactions powered by
+                    cutting-edge AI models. Chat naturally, think freely, and explore limitless possibilities.</p>
+                <div class="hero-actions">
+                    <a href="#" onclick="startChat()" class="cta-button primary">
+                        <span class="button-icon">🎤</span>
+                        Start Chat
+                    </a>
+                </div>
+            </div>
+            <div class="hero-character">
+                <div class="character-container">
+                    <img src="https://i.imgur.com/TZe9vge.png" alt="GrokAni" class="character-image"
+                        style="width: 300px; height: 300px; border-radius: 50%; object-fit: cover; position: relative; z-index: 100; box-shadow: 0 20px 60px rgba(107, 70, 193, 0.4); border: 3px solid #A855F7;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose GrokAni?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Natural Voice Interaction</h3>
+                    <p class="feature-description">Experience seamless voice conversations with advanced speech
+                        recognition and synthesis technology.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Multiple AI Models</h3>
+                    <p class="feature-description">Choose from GPT, Claude, Gemini, and other leading AI models for
+                        diverse conversation styles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Privacy First</h3>
+                    <p class="feature-description">Your conversations stay private with local processing and secure API
+                        connections.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">Optimized for speed with minimal latency for real-time voice
+                        interactions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- AI Models Section -->
+    <section id="models" class="models">
+        <div class="container">
+            <h2 class="section-title">Supported AI Models</h2>
+            <p class="section-subtitle">Connect with your favorite AI models using your own API keys</p>
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🤖</div>
+                        <h3 class="model-name">OpenAI GPT</h3>
+                    </div>
+                    <p class="model-description">Access GPT-4, GPT-3.5, and other OpenAI models for versatile
+                        conversations.</p>
+                    <a href="https://platform.openai.com/api-keys" target="_blank" class="api-link">Get OpenAI API Key
+                        →</a>
+                </div>
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🎭</div>
+                        <h3 class="model-name">Anthropic Claude</h3>
+                    </div>
+                    <p class="model-description">Experience Claude's thoughtful and nuanced conversational abilities.
+                    </p>
+                    <a href="https://console.anthropic.com/account/keys" target="_blank" class="api-link">Get Claude API
+                        Key →</a>
+                </div>
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">💎</div>
+                        <h3 class="model-name">Google Gemini</h3>
+                    </div>
+                    <p class="model-description">Leverage Google's advanced Gemini models for intelligent interactions.
+                    </p>
+                    <a href="https://makersuite.google.com/app/apikey" target="_blank" class="api-link">Get Gemini API
+                        Key →</a>
+                </div>
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🌟</div>
+                        <h3 class="model-name">More Models</h3>
+                    </div>
+                    <p class="model-description">Support for additional models including local LLMs and custom
+                        endpoints.</p>
+                    <span class="api-link disabled">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="setup">
+        <div class="container">
+            <h2 class="section-title">Quick Setup Guide</h2>
+            <div class="setup-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Choose Your AI Model</h3>
+                        <p class="step-description">Select from OpenAI GPT, Anthropic Claude, or Google Gemini based on
+                            your preference.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Get API Key</h3>
+                        <p class="step-description">Visit the provider's website and generate your API key. Links are
+                            provided in the AI Models section above.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Configure Settings</h3>
+                        <p class="step-description">Enter your API key in the settings panel and customize your voice
+                            preferences.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Start Chatting</h3>
+                        <p class="step-description">Click the "Start Chat" button and begin your AI voice conversation
+                            experience!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About GrokAni</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        GrokAni is built upon the open-source Airi project, extending its capabilities to create a
+                        comprehensive AI voice assistant platform. We believe in the power of open-source collaboration
+                        and transparent AI development.
+                    </p>
+                    <p class="about-description">
+                        Our mission is to make advanced AI voice interactions accessible to everyone, while maintaining
+                        the highest standards of privacy and user control. With support for multiple AI models and
+                        continuous improvements, GrokAni represents the future of conversational AI.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Open Source Foundation</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Privacy-Focused Design</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Multi-Model Support</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Continuous Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://i.imgur.com/TZe9vge.png" alt="GrokAni Logo"
+                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <span class="footer-brand-name">GrokAni</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#features" class="footer-link">Features</a>
+                    <a href="#models" class="footer-link">AI Models</a>
+                    <a href="#setup" class="footer-link">Setup</a>
+                    <a href="#about" class="footer-link">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-text">
+                    Built with ❤️ based on the open-source <a href="https://github.com/moeru-ai/airi" target="_blank"
+                        class="footer-link-external">Airi project</a>.
+                    Licensed under the same terms as the original project.
+                </p>
+                <p class="footer-copyright">© 2024 GrokAni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 确保图片正确加载
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有图片元素
+            const images = document.querySelectorAll('img');
+            
+            // 为每个图片添加加载事件处理
+            images.forEach(img => {
+                // 添加随机参数防止缓存
+                if (img.src.includes('imgur.com')) {
+                    img.src = img.src + '?v=' + new Date().getTime();
+                }
+                
+                // 添加错误处理
+                img.onerror = function() {
+                    console.error('Image failed to load:', this.src);
+                    // 重试加载
+                    setTimeout(() => {
+                        this.src = this.src.split('?')[0] + '?retry=' + new Date().getTime();
+                    }, 500);
+                };
+                
+                // 添加加载完成处理
+                img.onload = function() {
+                    console.log('Image loaded successfully:', this.src);
+                };
+            });
+        });
+        
+        // 当从其他页面返回时，确保重新加载图片
+        window.addEventListener('pageshow', function(event) {
+            // 如果是从缓存加载的页面，重新加载图片
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+</body>
+
+</html>
