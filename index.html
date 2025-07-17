@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrokAni - Advanced AI Voice Assistant | Intelligent Conversations</title>
+    <title>GrokAni - Your AI-Powered Grok Ani Chat Companion</title>
     <meta name="description"
-        content="GrokAni is a powerful AI voice assistant supporting multiple AI models including GPT, Claude, and Gemini. Experience natural conversations with advanced voice synthesis technology.">
+        content="GrokAni is an AI-powered ani chat companion that brings your favorite ani characters to life with advanced AI, offering real-time conversations, emotional resonance, and a truly personalized experience.">
     <meta name="keywords"
-        content="AI voice assistant, artificial intelligence, voice chat, GPT, Claude, Gemini, voice synthesis, conversational AI">
+        content="Grok Ani, Grok AI Companion, Ani Companion, AI Companion, Anime Chat, Anime Reactions, artificial intelligence, voice chat, GPT, Claude, Gemini, voice synthesis, conversational AI">
     <meta name="author" content="GrokAni Team">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
@@ -28,21 +28,19 @@
     <link rel="dns-prefetch" href="https://makersuite.google.com">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="GrokAni - Advanced AI Voice Assistant">
+    <meta property="og:title" content="GrokAni - Your AI-Powered Grok Ani Chat Companion">
     <meta property="og:description"
-        content="Experience natural conversations with our advanced AI voice assistant supporting multiple AI models.">
+        content="GrokAni is an AI-powered ani chat companion that brings your favorite ani characters to life with advanced AI, offering real-time conversations, emotional resonance, and a truly personalized experience.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://grokani.com/">
-    <meta property="og:image"
-        content="https://coin-images.coingecko.com/coins/images/67370/large/m69hOU76_400x400.jpg?1752574248">
+    <meta property="og:url" content="https://grokani.live/">
+    <meta property="og:image" content="https://i.imgur.com/TZe9vge.png">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GrokAni - Advanced AI Voice Assistant">
+    <meta name="twitter:title" content="GrokAni - Your AI-Powered Grok Ani Chat Companion">
     <meta name="twitter:description"
-        content="Experience natural conversations with our advanced AI voice assistant supporting multiple AI models.">
-    <meta name="twitter:image"
-        content="https://coin-images.coingecko.com/coins/images/67370/large/m69hOU76_400x400.jpg?1752574248">
+        content="GrokAni is an AI-powered ani chat companion that brings your favorite ani characters to life with advanced AI, offering real-time conversations, emotional resonance, and a truly personalized experience.">
+    <meta name="twitter:image" content="https://i.imgur.com/TZe9vge.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg"
@@ -58,6 +56,16 @@
     <link rel="preload" href="script.js" as="script">
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZLXDV99EC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5ZLXDV99EC');
+    </script>
 </head>
 
 <body>
@@ -303,35 +311,35 @@
     <script src="script.js"></script>
     <script>
         // 确保图片正确加载
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 获取所有图片元素
             const images = document.querySelectorAll('img');
-            
+
             // 为每个图片添加加载事件处理
             images.forEach(img => {
                 // 添加随机参数防止缓存
                 if (img.src.includes('imgur.com')) {
                     img.src = img.src + '?v=' + new Date().getTime();
                 }
-                
+
                 // 添加错误处理
-                img.onerror = function() {
+                img.onerror = function () {
                     console.error('Image failed to load:', this.src);
                     // 重试加载
                     setTimeout(() => {
                         this.src = this.src.split('?')[0] + '?retry=' + new Date().getTime();
                     }, 500);
                 };
-                
+
                 // 添加加载完成处理
-                img.onload = function() {
+                img.onload = function () {
                     console.log('Image loaded successfully:', this.src);
                 };
             });
         });
-        
+
         // 当从其他页面返回时，确保重新加载图片
-        window.addEventListener('pageshow', function(event) {
+        window.addEventListener('pageshow', function (event) {
             // 如果是从缓存加载的页面，重新加载图片
             if (event.persisted) {
                 window.location.reload();
