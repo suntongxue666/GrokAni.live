@@ -477,14 +477,14 @@
             title.style.color = 'var(--text-primary, #ffffff)';
             dialog.appendChild(title);
             
-            // 添加模型选项 - 增加到6个
+            // 添加模型选项 - 6个不同的提供商
             var models = [
-                { name: 'OpenAI GPT-4', icon: '🤖', provider: 'openai' },
-                { name: 'OpenAI GPT-3.5', icon: '🤖', provider: 'openai' },
-                { name: 'Anthropic Claude 3', icon: '🎭', provider: 'anthropic' },
-                { name: 'Anthropic Claude 2', icon: '🎭', provider: 'anthropic' },
-                { name: 'Google Gemini Pro', icon: '💎', provider: 'google' },
-                { name: 'Google Gemini Flash', icon: '💎', provider: 'google' }
+                { name: 'OpenAI', icon: '🤖', provider: 'openai' },
+                { name: 'Anthropic', icon: '🎭', provider: 'anthropic' },
+                { name: 'Gemini', icon: '💎', provider: 'google' },
+                { name: 'OpenRouter', icon: '🌐', provider: 'openrouter' },
+                { name: 'Ollama', icon: '🦙', provider: 'ollama' },
+                { name: 'DeepSeek', icon: '🔍', provider: 'deepseek' }
             ];
             
             models.forEach(function(model) {
@@ -547,14 +547,20 @@
         function startChatWithModel(modelName) {
             console.log('Starting chat with ' + modelName);
             
-            // 获取模型提供商
+            // 获取模型提供商 - 直接使用模型名称作为提供商
             let provider = '';
-            if (modelName.includes('GPT')) {
+            if (modelName === 'OpenAI') {
                 provider = 'openai';
-            } else if (modelName.includes('Claude')) {
+            } else if (modelName === 'Anthropic') {
                 provider = 'anthropic';
-            } else if (modelName.includes('Gemini')) {
+            } else if (modelName === 'Gemini') {
                 provider = 'google';
+            } else if (modelName === 'OpenRouter') {
+                provider = 'openrouter';
+            } else if (modelName === 'Ollama') {
+                provider = 'ollama';
+            } else if (modelName === 'DeepSeek') {
+                provider = 'deepseek';
             }
             
             // 显示API Key输入对话框
@@ -710,17 +716,37 @@
             continueButton.onclick = function() {
                 var apiKey = input.value.trim();
                 if (apiKey) {
-                    // 如果选择记住API Key，则保存到localStorage
-                    if (rememberCheckbox.checked) {
-                        localStorage.setItem(provider + '_api_key', apiKey);
-                    }
+                    // 保存API Key到localStorage，使用通用键名和特定于提供商的键名
+                    localStorage.setItem('grokani_provider', provider);
+                    localStorage.setItem('grokani_api_key', apiKey);
+                    
+                    // 同时保存特定于提供商的API Key
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                    
+                    // 显示保存成功的提示
+                    const saveMessage = document.createElement('div');
+                    saveMessage.textContent = 'API Key saved successfully!';
+                    saveMessage.style.position = 'fixed';
+                    saveMessage.style.top = '20px';
+                    saveMessage.style.left = '50%';
+                    saveMessage.style.transform = 'translateX(-50%)';
+                    saveMessage.style.backgroundColor = '#6B46C1';
+                    saveMessage.style.color = 'white';
+                    saveMessage.style.padding = '10px 20px';
+                    saveMessage.style.borderRadius = '8px';
+                    saveMessage.style.zIndex = '1000';
+                    document.body.appendChild(saveMessage);
                     
                     // 关闭对话框
                     document.body.removeChild(overlay);
                     document.body.removeChild(dialog);
                     
-                    // 跳转到聊天页面
-                    window.location.href = 'chat.html?model=' + encodeURIComponent(modelName) + '&provider=' + encodeURIComponent(provider) + '&apiKey=' + encodeURIComponent(apiKey);
+                    // 1秒后移除提示并跳转
+                    setTimeout(() => {
+                        document.body.removeChild(saveMessage);
+                        // 跳转到聊天页面
+                        window.location.href = 'chat.html';
+                    }, 1000);
                 } else {
                     // 显示错误消息
                     input.style.border = '1px solid red';

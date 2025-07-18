@@ -24,6 +24,9 @@
         
         gtag('config', 'G-5ZLXDV99EC');
     </script>
+    
+    <!-- API Key Handler -->
+    <script src="api-key-handler.js"></script>
     <style>
         body {
             margin: 0;
@@ -721,6 +724,23 @@
             const savedProvider = localStorage.getItem('grokani_provider') || 'openai';
             const savedApiKey = localStorage.getItem('grokani_api_key') || '';
             
+            // 显示当前使用的模型提供商
+            const providerDisplayNames = {
+                'openai': 'OpenAI',
+                'anthropic': 'Anthropic',
+                'google': 'Gemini',
+                'openrouter': 'OpenRouter',
+                'ollama': 'Ollama',
+                'deepseek': 'DeepSeek'
+            };
+            
+            // 更新聊天标题以显示当前使用的模型
+            const chatTitle = document.querySelector('.chat-title');
+            if (chatTitle && savedProvider) {
+                const providerName = providerDisplayNames[savedProvider] || savedProvider;
+                chatTitle.textContent = `Chat with GrokAni (${providerName})`;
+            }
+            
             // Initialize UI elements
             const sidebar = document.getElementById('sidebar');
             const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
@@ -773,15 +793,239 @@
                 sidebar.classList.toggle('open');
             });
             
+            // 当用户切换提供商时，自动加载对应的API Key
+            document.getElementById('providerSelector').addEventListener('change', function() {
+                const selectedProvider = this.value;
+                // 尝试加载特定于提供商的API Key
+                const providerSpecificKey = localStorage.getItem(selectedProvider + '_api_key');
+                if (providerSpecificKey) {
+                    document.getElementById('apiKeyInput').value = providerSpecificKey;
+                } else {
+                    // 如果没有特定于提供商的API Key，则清空输入框
+                    document.getElementById('apiKeyInput').value = '';
+                }
+                
+                // 更新聊天标题以显示当前选择的提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[selectedProvider] || selectedProvider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+            });
+            
             // Save settings
             saveSettingsBtn.addEventListener('click', function() {
                 const provider = document.getElementById('providerSelector').value;
                 const apiKey = document.getElementById('apiKeyInput').value;
                 
+                // 保存通用设置
                 localStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
                 
-                alert('Settings saved successfully!');
+                // 同时保存特定于提供商的API Key
+                if (apiKey) {
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                }
+                
+                // 更新聊天标题以显示当前提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[provider] || provider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+                
+                // 显示保存成功的提示
+                const saveMessage = document.createElement('div');
+                saveMessage.textContent = 'Settings saved successfully!';
+                saveMessage.style.position = 'fixed';
+                saveMessage.style.top = '20px';
+                saveMessage.style.left = '50%';
+                saveMessage.style.transform = 'translateX(-50%)';
+                saveMessage.style.backgroundColor = '#6B46C1';
+                saveMessage.style.color = 'white';
+                saveMessage.style.padding = '10px 20px';
+                saveMessage.style.borderRadius = '8px';
+                saveMessage.style.zIndex = '1000';
+                document.body.appendChild(saveMessage);
+                
+                // 2秒后移除提示
+                setTimeout(() => {
+                    document.body.removeChild(saveMessage);
+                }, 2000);
+                
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }lStorage.setItem('grokani_provider', provider);
+                localStorage.setItem('grokani_api_key', apiKey);
+                
+                // 同时保存特定于提供商的API Key
+                if (apiKey) {
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                }
+                
+                // 更新聊天标题以显示当前提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[provider] || provider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+                
+                // 显示保存成功的提示
+                const saveMessage = document.createElement('div');
+                saveMessage.textContent = 'Settings saved successfully!';
+                saveMessage.style.position = 'fixed';
+                saveMessage.style.top = '20px';
+                saveMessage.style.left = '50%';
+                saveMessage.style.transform = 'translateX(-50%)';
+                saveMessage.style.backgroundColor = '#6B46C1';
+                saveMessage.style.color = 'white';
+                saveMessage.style.padding = '10px 20px';
+                saveMessage.style.borderRadius = '8px';
+                saveMessage.style.zIndex = '1000';
+                document.body.appendChild(saveMessage);
+                
+                // 2秒后移除提示
+                setTimeout(() => {
+                    document.body.removeChild(saveMessage);
+                }, 2000);
+                
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }lStorage.setItem('grokani_provider', provider);
+                localStorage.setItem('grokani_api_key', apiKey);
+                
+                // 同时保存特定于提供商的API Key
+                if (apiKey) {
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                }
+                
+                // 更新聊天标题以显示当前提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[provider] || provider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+                
+                // 显示保存成功的提示
+                const saveMessage = document.createElement('div');
+                saveMessage.textContent = 'Settings saved successfully!';
+                saveMessage.style.position = 'fixed';
+                saveMessage.style.top = '20px';
+                saveMessage.style.left = '50%';
+                saveMessage.style.transform = 'translateX(-50%)';
+                saveMessage.style.backgroundColor = '#6B46C1';
+                saveMessage.style.color = 'white';
+                saveMessage.style.padding = '10px 20px';
+                saveMessage.style.borderRadius = '8px';
+                saveMessage.style.zIndex = '1000';
+                document.body.appendChild(saveMessage);
+                
+                // 2秒后移除提示
+                setTimeout(() => {
+                    document.body.removeChild(saveMessage);
+                }, 2000);
+                
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }lStorage.setItem('grokani_provider', provider);
+                localStorage.setItem('grokani_api_key', apiKey);
+                
+                // 同时保存特定于提供商的API Key
+                if (apiKey) {
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                }
+                
+                // 更新聊天标题以显示当前提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[provider] || provider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+                
+                // 显示保存成功的提示
+                const saveMessage = document.createElement('div');
+                saveMessage.textContent = 'Settings saved successfully!';
+                saveMessage.style.position = 'fixed';
+                saveMessage.style.top = '20px';
+                saveMessage.style.left = '50%';
+                saveMessage.style.transform = 'translateX(-50%)';
+                saveMessage.style.backgroundColor = '#6B46C1';
+                saveMessage.style.color = 'white';
+                saveMessage.style.padding = '10px 20px';
+                saveMessage.style.borderRadius = '8px';
+                saveMessage.style.zIndex = '1000';
+                document.body.appendChild(saveMessage);
+                
+                // 2秒后移除提示
+                setTimeout(() => {
+                    document.body.removeChild(saveMessage);
+                }, 2000);
+                
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }lStorage.setItem('grokani_provider', provider);
+                localStorage.setItem('grokani_api_key', apiKey);
+                
+                // 同时保存特定于提供商的API Key
+                if (apiKey) {
+                    localStorage.setItem(provider + '_api_key', apiKey);
+                }
+                
+                // 更新聊天标题以显示当前提供商
+                const providerDisplayNames = {
+                    'openai': 'OpenAI',
+                    'anthropic': 'Anthropic',
+                    'google': 'Gemini',
+                    'openrouter': 'OpenRouter',
+                    'ollama': 'Ollama',
+                    'deepseek': 'DeepSeek'
+                };
+                const providerName = providerDisplayNames[provider] || provider;
+                document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
+                
+                // 显示保存成功的提示
+                const saveMessage = document.createElement('div');
+                saveMessage.textContent = 'Settings saved successfully!';
+                saveMessage.style.position = 'fixed';
+                saveMessage.style.top = '20px';
+                saveMessage.style.left = '50%';
+                saveMessage.style.transform = 'translateX(-50%)';
+                saveMessage.style.backgroundColor = '#6B46C1';
+                saveMessage.style.color = 'white';
+                saveMessage.style.padding = '10px 20px';
+                saveMessage.style.borderRadius = '8px';
+                saveMessage.style.zIndex = '1000';
+                document.body.appendChild(saveMessage);
+                
+                // 2秒后移除提示
+                setTimeout(() => {
+                    document.body.removeChild(saveMessage);
+                }, 2000);
                 
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
