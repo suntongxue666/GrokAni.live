@@ -332,6 +332,20 @@
     <script>
         // 加载壁纸页面广告脚本函数
         function loadWallpaperAd(event) {
+            // 检测是否为移动设备
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // 如果是移动设备，直接跳转到壁纸页面
+            if (isMobile) {
+                console.log('Mobile device detected, skipping ad and redirecting to wallpapers page');
+                window.location.href = 'wallpapers.html';
+                event.preventDefault();
+                return;
+            }
+            
+            // PC端显示广告
+            console.log('Desktop device detected, showing ad before redirecting');
+            
             // 创建一个计时器，在一定时间后自动跳转到壁纸页面（如果广告没有正常加载）
             var adTimeout = setTimeout(function() {
                 window.location.href = 'wallpapers.html';
@@ -343,7 +357,7 @@
             // 加载广告脚本
             var adScript = document.createElement('script');
             
-            // 使用匿名函数包装广告代码，以便在移动端也能正常工作
+            // 使用匿名函数包装广告代码
             (function(d,z,s){
                 s.src='https://'+d+'/401/'+z;
                 try{
