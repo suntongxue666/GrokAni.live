@@ -60,6 +60,10 @@
 
         gtag('config', 'G-5ZLXDV99EC');
     </script>
+    
+    <!-- Ko-fi widget -->
+    <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+    <script type='text/javascript'>kofiwidget2.init('A cup 🔐 Download wallpapers', '#c643e0', 'U7U01GL6A8');</script>
 
     <style>
         /* Wallpaper Gallery Specific Styles */
@@ -170,27 +174,23 @@
 
         .wallpaper-overlay {
             position: absolute;
-            bottom: 80px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            transform: translate(-50%, -50%);
             padding: 15px 25px;
             border-radius: var(--border-radius);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 15px;
             z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .wallpaper-item:hover .wallpaper-overlay {
             opacity: 1;
+            transition: all 0.3s ease;
         }
 
-        .download-btn {
-            background: var(--primary-purple);
+        .kofi-btn {
+            background: #29abe0;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -204,8 +204,28 @@
             gap: 8px;
         }
 
+        .kofi-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .download-btn {
+            background: rgba(107, 70, 193, 0.7); /* 紫色半透明 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: none; /* 默认隐藏 */
+            align-items: center;
+            gap: 8px;
+        }
+
         .download-btn:hover {
-            background: var(--accent-purple);
+            background: rgba(107, 70, 193, 0.9);
             transform: translateY(-2px);
         }
 
@@ -351,6 +371,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/0DVHMPC.jpg" alt="Anime Wallpaper 1" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/0DVHMPC.jpg', 'anime-wallpaper-1.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -363,6 +387,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/i4DXike.jpg" alt="Anime Wallpaper 2" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/i4DXike.jpg', 'anime-wallpaper-2.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -375,6 +403,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/hbdz0Um.jpg" alt="Anime Wallpaper 3" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/hbdz0Um.jpg', 'anime-wallpaper-3.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -387,6 +419,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/mm3gcLl.jpg" alt="Anime Wallpaper 4" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/mm3gcLl.jpg', 'anime-wallpaper-4.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -399,6 +435,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/CYEP7dj.jpg" alt="Anime Wallpaper 5" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/CYEP7dj.jpg', 'anime-wallpaper-5.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -411,6 +451,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/fSCJ8V9.jpg" alt="Anime Wallpaper 6" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/fSCJ8V9.jpg', 'anime-wallpaper-6.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -423,6 +467,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/KvZqNsC.jpg" alt="Anime Wallpaper 7" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/KvZqNsC.jpg', 'anime-wallpaper-7.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -435,6 +483,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/AnjaIdG.jpg" alt="Anime Wallpaper 8" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/AnjaIdG.jpg', 'anime-wallpaper-8.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -447,6 +499,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/COXVGvd.jpg" alt="Anime Wallpaper 9" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/COXVGvd.jpg', 'anime-wallpaper-9.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -459,6 +515,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/tlBU7OV.jpg" alt="Anime Wallpaper 10" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/tlBU7OV.jpg', 'anime-wallpaper-10.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -471,6 +531,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/le0d75J.jpg" alt="Anime Wallpaper 11" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/le0d75J.jpg', 'anime-wallpaper-11.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -483,6 +547,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/TaTzZPO.jpg" alt="Anime Wallpaper 12" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/TaTzZPO.jpg', 'anime-wallpaper-12.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -495,6 +563,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/5XNJMvX.jpg" alt="Anime Wallpaper 13" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/5XNJMvX.jpg', 'anime-wallpaper-13.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -507,6 +579,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/uWvVm6J.jpg" alt="Anime Wallpaper 14" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/uWvVm6J.jpg', 'anime-wallpaper-14.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -519,6 +595,10 @@
             <div class="wallpaper-item">
                 <img src="https://imgur.com/V9nLMhi.jpg" alt="Anime Wallpaper 15" class="wallpaper-img">
                 <div class="wallpaper-overlay">
+                    <button class="kofi-btn" onclick="showDownloadButton(this)">
+                        <span>Ko-fi</span>
+                        <span>☕</span>
+                    </button>
                     <button onclick="downloadWallpaper('https://imgur.com/V9nLMhi.jpg', 'anime-wallpaper-15.jpg')"
                         class="download-btn">
                         <span>Download</span>
@@ -565,6 +645,49 @@
 
     <script src="script.js"></script>
     <script>
+        // 显示下载按钮的函数
+        function showDownloadButton(kofiBtn) {
+            // 获取父元素中的下载按钮
+            const overlay = kofiBtn.closest('.wallpaper-overlay');
+            const downloadBtn = overlay.querySelector('.download-btn');
+            
+            if (downloadBtn) {
+                // 打开Ko-fi窗口
+                window.open('https://ko-fi.com/U7U01GL6A8', '_blank');
+                
+                // 显示下载按钮
+                downloadBtn.style.display = 'inline-flex';
+                // 隐藏Ko-fi按钮
+                kofiBtn.style.display = 'none';
+                
+                // 5秒后恢复原状
+                setTimeout(() => {
+                    downloadBtn.style.display = 'none';
+                    kofiBtn.style.display = 'inline-flex';
+                }, 5000);
+            }
+        }
+        
+        // 初始化Ko-fi按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            // 使用Ko-fi官方按钮替换自定义按钮
+            const kofiBtns = document.querySelectorAll('.kofi-btn');
+            kofiBtns.forEach(btn => {
+                // 更新按钮样式为紫色
+                btn.style.background = '#c643e0';
+                btn.innerHTML = '<span>Unlock Download</span><span>🔐</span>';
+            });
+            
+            // 尝试初始化Ko-fi小部件
+            try {
+                if (typeof kofiwidget2 !== 'undefined') {
+                    kofiwidget2.init('Unlock Download Wallpapers', '#c643e0', 'U7U01GL6A8');
+                }
+            } catch (e) {
+                console.error('Ko-fi widget initialization failed:', e);
+            }
+        });
+        
         // Wallpaper slider variables
         let currentWallpaper = 0;
         const totalWallpapers = 15; // Updated to include the new wallpaper
