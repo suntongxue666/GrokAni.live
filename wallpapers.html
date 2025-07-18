@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrokAni Wallpapers - Download Beautiful Anime Wallpapers</title>
+    <meta name="description"
+        content="Download beautiful high-quality anime wallpapers from GrokAni. Perfect for desktop, mobile, and tablet devices.">
+    <meta name="keywords"
+        content="Grok Ani, Anime Wallpapers, Anime Backgrounds, HD Wallpapers, Mobile Wallpapers, Desktop Wallpapers">
+    <meta name="author" content="GrokAni Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://grokani.live/wallpapers.html">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#6B46C1">
+    <meta name="msapplication-TileColor" content="#6B46C1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GrokAni Wallpapers">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="GrokAni Wallpapers - Download Beautiful Anime Wallpapers">
+    <meta property="og:description"
+        content="Download beautiful high-quality anime wallpapers from GrokAni. Perfect for desktop, mobile, and tablet devices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://grokani.live/wallpapers.html">
+    <meta property="og:image" content="https://i.imgur.com/TZe9vge.png">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GrokAni Wallpapers - Download Beautiful Anime Wallpapers">
+    <meta name="twitter:description"
+        content="Download beautiful high-quality anime wallpapers from GrokAni. Perfect for desktop, mobile, and tablet devices.">
+    <meta name="twitter:image" content="https://i.imgur.com/TZe9vge.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+    <link rel="apple-touch-icon"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZLXDV99EC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5ZLXDV99EC');
+    </script>
+
+    <style>
+        /* Wallpaper Gallery Specific Styles */
+        .wallpaper-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 140px);
+            min-height: 600px;
+            margin-top: 0;
+            /* 从20px减少到0，再上移20像素 */
+            overflow: hidden;
+        }
+
+        .wallpaper-slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            /* 优化性能 */
+        }
+
+        .wallpaper-item {
+            flex: 0 0 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--darker-bg);
+            transform: translateZ(0);
+            /* 强制GPU加速，减少黑屏问题 */
+            backface-visibility: hidden;
+            /* 优化性能 */
+            -webkit-backface-visibility: hidden;
+            visibility: visible !important;
+            /* 确保元素始终可见 */
+            opacity: 1 !important;
+            /* 确保元素始终不透明 */
+        }
+
+        /* 预加载所有壁纸图片 */
+        .wallpaper-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-card);
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .wallpaper-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-card);
+        }
+
+        .wallpaper-nav {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.3;
+        }
+
+        .wallpaper-nav:hover {
+            opacity: 1;
+        }
+
+        .wallpaper-nav.prev {
+            left: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .wallpaper-nav.next {
+            right: 0;
+            background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .wallpaper-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .wallpaper-overlay {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-overlay {
+            opacity: 1;
+        }
+
+        .download-btn {
+            background: var(--primary-purple);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        .wallpaper-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            /* 增加与下方深色背景的间距40像素 */
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--card-border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--accent-purple);
+            transform: scale(1.2);
+        }
+
+        .wallpaper-header {
+            text-align: center;
+            padding: 120px 20px 40px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent),
+                url('https://imgur.com/0DVHMPC.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .wallpaper-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 15, 35, 0.7);
+            z-index: 0;
+        }
+
+        .wallpaper-title {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .wallpaper-description {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Touch swipe support */
+        .wallpaper-container {
+            touch-action: pan-y;
+        }
+
+        /* Keyboard navigation indicator */
+        .keyboard-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            border-radius: var(--border-radius-small);
+            font-size: 0.8rem;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .wallpaper-container {
+                height: calc(100vh - 150px);
+                min-height: 400px;
+            }
+
+            .wallpaper-nav {
+                width: 50px;
+            }
+
+            .keyboard-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                    <div class="logo">
+                        <img src="https://i.imgur.com/TZe9vge.png" alt="GrokAni Logo"
+                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <span class="brand-name">GrokAni</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="chat.html" class="nav-link">Chat</a>
+                <a href="models.html" class="nav-link">Models</a>
+                <a href="wallpapers.html" class="nav-link">Wallpapers</a>
+            </div>
+            <div class="nav-mobile">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Wallpaper Header -->
+    <section class="wallpaper-header">
+        <h1 class="wallpaper-title">GrokAni Wallpapers</h1>
+        <p class="wallpaper-description">Download beautiful high-quality anime wallpapers for your devices. Perfect for
+            personalizing your desktop, mobile, or tablet.</p>
+    </section>
+
+    <!-- Wallpaper Gallery -->
+    <div class="wallpaper-container">
+        <div class="wallpaper-slider" id="wallpaperSlider">
+            <!-- Wallpaper 1 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/0DVHMPC.jpg" alt="Anime Wallpaper 1" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/0DVHMPC.jpg', 'anime-wallpaper-1.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 2 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/i4DXike.jpg" alt="Anime Wallpaper 2" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/i4DXike.jpg', 'anime-wallpaper-2.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 3 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/hbdz0Um.jpg" alt="Anime Wallpaper 3" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/hbdz0Um.jpg', 'anime-wallpaper-3.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 4 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/mm3gcLl.jpg" alt="Anime Wallpaper 4" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/mm3gcLl.jpg', 'anime-wallpaper-4.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 5 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/CYEP7dj.jpg" alt="Anime Wallpaper 5" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/CYEP7dj.jpg', 'anime-wallpaper-5.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 6 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/fSCJ8V9.jpg" alt="Anime Wallpaper 6" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/fSCJ8V9.jpg', 'anime-wallpaper-6.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 7 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/KvZqNsC.jpg" alt="Anime Wallpaper 7" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/KvZqNsC.jpg', 'anime-wallpaper-7.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 8 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/AnjaIdG.jpg" alt="Anime Wallpaper 8" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/AnjaIdG.jpg', 'anime-wallpaper-8.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 9 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/COXVGvd.jpg" alt="Anime Wallpaper 9" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/COXVGvd.jpg', 'anime-wallpaper-9.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 10 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/tlBU7OV.jpg" alt="Anime Wallpaper 10" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/tlBU7OV.jpg', 'anime-wallpaper-10.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 11 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/le0d75J.jpg" alt="Anime Wallpaper 11" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/le0d75J.jpg', 'anime-wallpaper-11.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 12 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/TaTzZPO.jpg" alt="Anime Wallpaper 12" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/TaTzZPO.jpg', 'anime-wallpaper-12.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 13 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/5XNJMvX.jpg" alt="Anime Wallpaper 13" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/5XNJMvX.jpg', 'anime-wallpaper-13.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 14 -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/uWvVm6J.jpg" alt="Anime Wallpaper 14" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/uWvVm6J.jpg', 'anime-wallpaper-14.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper 15 (New) -->
+            <div class="wallpaper-item">
+                <img src="https://imgur.com/V9nLMhi.jpg" alt="Anime Wallpaper 15" class="wallpaper-img">
+                <div class="wallpaper-overlay">
+                    <button onclick="downloadWallpaper('https://imgur.com/V9nLMhi.jpg', 'anime-wallpaper-15.jpg')"
+                        class="download-btn">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="wallpaper-nav prev" onclick="changeWallpaper(-1)">
+            <span class="nav-icon">❮</span>
+        </div>
+        <div class="wallpaper-nav next" onclick="changeWallpaper(1)">
+            <span class="nav-icon">❯</span>
+        </div>
+
+        <!-- Wallpaper Counter -->
+        <div class="wallpaper-counter" id="wallpaperCounter">1 / 15</div>
+
+        <!-- Keyboard Navigation Hint -->
+        <div class="keyboard-hint">Use ← → arrow keys to navigate</div>
+    </div>
+
+    <!-- Wallpaper Dots Navigation -->
+    <div class="wallpaper-dots" id="wallpaperDots">
+        <!-- Dots will be added by JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p class="footer-text">
+                    Built with ❤️ based on the open-source <a href="https://github.com/moeru-ai/airi" target="_blank"
+                        class="footer-link-external">Airi project</a>.
+                    Licensed under the same terms as the original project.
+                </p>
+                <p class="footer-copyright">© 2024 GrokAni. All rights reserved. | <a href="sitemap.xml"
+                        class="footer-link-external" target="_blank">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Wallpaper slider variables
+        let currentWallpaper = 0;
+        const totalWallpapers = 15; // Updated to include the new wallpaper
+
+        // Initialize wallpaper slider
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all image elements
+            const images = document.querySelectorAll('img');
+
+            // Add load event handling for each image
+            images.forEach(img => {
+                // Add random parameter to prevent caching
+                if (img.src.includes('imgur.com')) {
+                    img.src = img.src + '?v=' + new Date().getTime();
+                }
+
+                // Add error handling
+                img.onerror = function () {
+                    console.error('Image failed to load:', this.src);
+                    // Retry loading
+                    setTimeout(() => {
+                        this.src = this.src.split('?')[0] + '?retry=' + new Date().getTime();
+                    }, 500);
+                };
+
+                // Add load complete handling
+                img.onload = function () {
+                    console.log('Image loaded successfully:', this.src);
+                };
+            });
+
+            // Initialize wallpaper dots
+            initWallpaperDots();
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft') {
+                    changeWallpaper(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeWallpaper(1);
+                }
+            });
+
+            // Add touch swipe support
+            const slider = document.getElementById('wallpaperSlider');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            slider.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            slider.addEventListener('touchend', function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left
+                    changeWallpaper(1);
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right
+                    changeWallpaper(-1);
+                }
+            }
+
+            // Update counter initially
+            updateWallpaperCounter();
+        });
+
+        // When returning from other pages, ensure images reload
+        window.addEventListener('pageshow', function (event) {
+            // If page is loaded from cache, reload images
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Change wallpaper function
+        function changeWallpaper(direction) {
+            currentWallpaper = (currentWallpaper + direction + totalWallpapers) % totalWallpapers;
+            updateWallpaperSlider();
+            updateWallpaperCounter();
+            updateActiveDot();
+        }
+
+        // Update wallpaper slider position
+        function updateWallpaperSlider() {
+            const slider = document.getElementById('wallpaperSlider');
+            slider.style.transform = `translateX(-${currentWallpaper * 100}%)`;
+        }
+
+        // Update wallpaper counter
+        function updateWallpaperCounter() {
+            const counter = document.getElementById('wallpaperCounter');
+            counter.textContent = `${currentWallpaper + 1} / ${totalWallpapers}`;
+        }
+
+        // Initialize wallpaper dots
+        function initWallpaperDots() {
+            const dotsContainer = document.getElementById('wallpaperDots');
+            dotsContainer.innerHTML = '';
+
+            for (let i = 0; i < totalWallpapers; i++) {
+                const dot = document.createElement('div');
+                dot.className = i === currentWallpaper ? 'dot active' : 'dot';
+                dot.onclick = function () {
+                    currentWallpaper = i;
+                    updateWallpaperSlider();
+                    updateWallpaperCounter();
+                    updateActiveDot();
+                };
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update active dot
+        function updateActiveDot() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.className = index === currentWallpaper ? 'dot active' : 'dot';
+            });
+        }
+
+        // Go to specific wallpaper
+        function goToWallpaper(index) {
+            currentWallpaper = index;
+            updateWallpaperSlider();
+            updateWallpaperCounter();
+            updateActiveDot();
+        }
+
+        // Download wallpaper function - directly download without redirecting to Imgur
+        function downloadWallpaper(imgUrl, fileName) {
+            // Create a temporary canvas to convert the image
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+
+            // Show loading indicator
+            const downloadBtn = event.currentTarget;
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<span>Downloading...</span>';
+            downloadBtn.disabled = true;
+
+            // When image loads, draw it to canvas and trigger download
+            img.crossOrigin = 'anonymous';  // This enables CORS
+            img.onload = function () {
+                // Set canvas size to image size
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw image to canvas
+                ctx.drawImage(img, 0, 0);
+
+                try {
+                    // Convert canvas to blob and download
+                    canvas.toBlob(function (blob) {
+                        // Create download link
+                        const link = document.createElement('a');
+                        link.download = fileName;
+                        link.href = URL.createObjectURL(blob);
+
+                        // Trigger download
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        // Clean up
+                        URL.revokeObjectURL(link.href);
+
+                        // Restore button
+                        setTimeout(() => {
+                            downloadBtn.innerHTML = originalText;
+                            downloadBtn.disabled = false;
+                        }, 1000);
+                    }, 'image/jpeg', 0.95);
+                } catch (e) {
+                    console.error('Download failed:', e);
+                    // Fallback method - open in new tab
+                    fallbackDownload(imgUrl, fileName, downloadBtn, originalText);
+                }
+            };
+
+            // Handle errors
+            img.onerror = function () {
+                console.error('Failed to load image for download');
+                fallbackDownload(imgUrl, fileName, downloadBtn, originalText);
+            };
+
+            // Start loading the image
+            img.src = imgUrl;
+        }
+
+        // Fallback download method
+        function fallbackDownload(imgUrl, fileName, downloadBtn, originalText) {
+            // Create a direct download link that forces download
+            const directUrl = imgUrl.replace('imgur.com', 'i.imgur.com');
+            const link = document.createElement('a');
+            link.href = directUrl;
+            link.download = fileName;
+            link.target = '_blank';
+
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Restore button
+            setTimeout(() => {
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
