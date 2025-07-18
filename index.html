@@ -135,7 +135,7 @@
                         <img src="https://imgur.com/mm3gcLl.jpg" alt="Ani Wallpaper 3" class="ani-wallpaper"
                             style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1; border-radius: 0;">
                     </div>
-                    <a href="wallpapers.html" class="wallpaper-banner" style="position: absolute; bottom: 40px; left: 0; right: 0; background: rgba(107, 70, 193, 0.7); color: white; text-align: center; padding: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(5px); z-index: 101; margin: 0 20px; border-radius: 30px;" onclick="loadAdScript(event)">
+                    <a href="#" class="wallpaper-banner" style="position: absolute; bottom: 40px; left: 0; right: 0; background: rgba(107, 70, 193, 0.7); color: white; text-align: center; padding: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(5px); z-index: 101; margin: 0 20px; border-radius: 30px;" onclick="loadWallpaperAd(event)">
                         View Ani Wallpapers
                     </a>
                 </div>
@@ -345,17 +345,165 @@
         
         // 加载开始聊天广告脚本函数
         function loadStartChatAd() {
+            // 创建一个标志，表示广告已经加载
+            window.adLoaded = true;
+            
+            // 创建一个计时器，在一定时间后自动继续聊天流程（如果广告没有正常关闭）
+            var adTimeout = setTimeout(function() {
+                startChatProcess();
+            }, 5000); // 5秒后自动继续
+            
+            // 保存计时器ID，以便在广告关闭时清除
+            window.adTimeoutId = adTimeout;
+            
+            // 监听广告关闭事件
+            window.addEventListener('message', function(event) {
+                // 检查消息是否来自广告
+                if (event.data && event.data.adClosed) {
+                    // 清除自动继续的计时器
+                    clearTimeout(window.adTimeoutId);
+                    // 继续聊天流程
+                    startChatProcess();
+                }
+            });
+            
             // 加载广告脚本
+            var adScript = document.createElement('script');
+            adScript.onload = function() {
+                console.log('Ad script loaded');
+            };
+            
+            // 使用匿名函数包装广告代码，以便在移动端也能正常工作
             (function(d,z,s){
                 s.src='https://'+d+'/401/'+z;
                 try{
-                    (document.body||document.documentElement).appendChild(s)
-                }catch(e){}
-            })('gizokraijaw.net',9588047,document.createElement('script'));
+                    (document.body||document.documentElement).appendChild(s);
+                    
+                    // 为移动设备添加特殊处理
+                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        // 移动设备上可能需要特殊处理
+                        console.log('Mobile device detected, applying special handling');
+                        
+                        // 确保广告容器适应移动屏幕
+                        var adContainers = document.querySelectorAll('.ad-container');
+                        adContainers.forEach(function(container) {
+                            container.style.width = '100%';
+                            container.style.maxWidth = '100vw';
+                            container.style.height = 'auto';
+                        });
+                    }
+                }catch(e){
+                    console.error('Error loading ad:', e);
+                    // 如果广告加载失败，继续聊天流程
+                    startChatProcess();
+                }
+            })('gizokraijaw.net',9588047,adScript);
             
-            // 模拟聊天功能启动
-            console.log('Starting chat...');
+            console.log('Ad loading initiated');
+        }
+        
+        // 开始聊天流程
+        function startChatProcess() {
+            console.log('Starting chat process...');
+            
+            // 创建模型选择对话框
+            showModelSelectionDialog();
+        }
+        
+        // 显示模型选择对话框
+        function showModelSelectionDialog() {
+            // 创建对话框元素
+            var dialog = document.createElement('div');
+            dialog.className = 'model-selection-dialog';
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = 'var(--card-bg, #1a1a2e)';
+            dialog.style.borderRadius = 'var(--border-radius, 12px)';
+            dialog.style.padding = '20px';
+            dialog.style.boxShadow = 'var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.5))';
+            dialog.style.zIndex = '1000';
+            dialog.style.maxWidth = '90%';
+            dialog.style.width = '400px';
+            
+            // 添加标题
+            var title = document.createElement('h3');
+            title.textContent = 'Select AI Model';
+            title.style.marginTop = '0';
+            title.style.color = 'var(--text-primary, #ffffff)';
+            dialog.appendChild(title);
+            
+            // 添加模型选项
+            var models = [
+                { name: 'OpenAI GPT', icon: '🤖' },
+                { name: 'Anthropic Claude', icon: '🎭' },
+                { name: 'Google Gemini', icon: '💎' }
+            ];
+            
+            models.forEach(function(model) {
+                var option = document.createElement('div');
+                option.className = 'model-option';
+                option.style.display = 'flex';
+                option.style.alignItems = 'center';
+                option.style.padding = '12px';
+                option.style.margin = '10px 0';
+                option.style.borderRadius = 'var(--border-radius-small, 8px)';
+                option.style.backgroundColor = 'var(--card-hover-bg, #252547)';
+                option.style.cursor = 'pointer';
+                option.style.transition = 'var(--transition, all 0.3s ease)';
+                
+                option.innerHTML = '<span style="font-size: 1.5rem; margin-right: 12px;">' + model.icon + '</span>' +
+                                  '<span style="color: var(--text-primary, #ffffff);">' + model.name + '</span>';
+                
+                // 添加点击事件
+                option.onclick = function() {
+                    // 关闭对话框
+                    document.body.removeChild(dialog);
+                    // 开始与选定模型的聊天
+                    startChatWithModel(model.name);
+                };
+                
+                // 添加悬停效果
+                option.onmouseover = function() {
+                    this.style.backgroundColor = 'var(--accent-purple, #6B46C1)';
+                };
+                option.onmouseout = function() {
+                    this.style.backgroundColor = 'var(--card-hover-bg, #252547)';
+                };
+                
+                dialog.appendChild(option);
+            });
+            
+            // 添加取消按钮
+            var cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.style.backgroundColor = 'transparent';
+            cancelButton.style.border = '1px solid var(--card-border, #444464)';
+            cancelButton.style.color = 'var(--text-secondary, #a0a0c0)';
+            cancelButton.style.padding = '8px 16px';
+            cancelButton.style.borderRadius = 'var(--border-radius-small, 8px)';
+            cancelButton.style.cursor = 'pointer';
+            cancelButton.style.marginTop = '15px';
+            cancelButton.style.width = '100%';
+            
+            cancelButton.onclick = function() {
+                document.body.removeChild(dialog);
+            };
+            
+            dialog.appendChild(cancelButton);
+            
+            // 添加到页面
+            document.body.appendChild(dialog);
+        }
+        
+        // 开始与选定模型的聊天
+        function startChatWithModel(modelName) {
+            console.log('Starting chat with ' + modelName);
+            
             // 这里可以添加实际的聊天功能启动代码
+            // 例如重定向到聊天页面
+            window.location.href = 'chat.html?model=' + encodeURIComponent(modelName);
         }
         
         // 确保图片正确加载
