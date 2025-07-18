@@ -11,22 +11,25 @@
     <meta name="author" content="GrokAni Team">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+    <link rel="icon" type="image/jpeg"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
 
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZLXDV99EC"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        
+
         gtag('config', 'G-5ZLXDV99EC');
     </script>
-    
+
     <!-- API Key Handler -->
     <script src="api-key-handler.js"></script>
+    <!-- Chat Fix -->
+    <script src="chat-fix.js"></script>
     <style>
         body {
             margin: 0;
@@ -38,7 +41,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         body::before {
             content: '';
             position: absolute;
@@ -52,7 +55,7 @@
             opacity: 0.2;
             z-index: -1;
         }
-        
+
         /* Header Styles */
         .header {
             background: rgba(15, 15, 35, 0.8);
@@ -62,7 +65,7 @@
             top: 0;
             z-index: 100;
         }
-        
+
         .nav {
             display: flex;
             justify-content: space-between;
@@ -71,18 +74,18 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .nav-brand {
             display: flex;
             align-items: center;
             gap: 0.8rem;
         }
-        
+
         .logo {
             width: 2.5rem;
             height: 2.5rem;
         }
-        
+
         .brand-name {
             font-size: 1.5rem;
             font-weight: 700;
@@ -91,12 +94,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .nav-links {
             display: flex;
             gap: 2rem;
         }
-        
+
         .nav-link {
             color: #FFFFFF;
             text-decoration: none;
@@ -105,11 +108,11 @@
             padding: 0.5rem 0;
             position: relative;
         }
-        
+
         .nav-link:hover {
             color: #A855F7;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -120,15 +123,15 @@
             background: linear-gradient(135deg, #6B46C1, #A855F7);
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         .nav-mobile {
             display: none;
         }
-        
+
         .mobile-menu-btn {
             background: none;
             border: none;
@@ -140,7 +143,7 @@
             width: 30px;
             padding: 0;
         }
-        
+
         .mobile-menu-btn span {
             display: block;
             height: 2px;
@@ -148,26 +151,26 @@
             background-color: #FFFFFF;
             transition: all 0.3s ease;
         }
-        
+
         @media (max-width: 768px) {
             .nav {
                 padding: 0.8rem 1rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .nav-mobile {
                 display: block;
             }
         }
-        
+
         .chat-container {
             display: flex;
             height: 100vh;
         }
-        
+
         /* Sidebar Styles */
         .sidebar {
             width: 280px;
@@ -179,7 +182,7 @@
             transition: all 0.3s ease;
             z-index: 10;
         }
-        
+
         .sidebar-header {
             padding: 20px;
             display: flex;
@@ -187,12 +190,12 @@
             gap: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .sidebar-logo {
             width: 32px;
             height: 32px;
         }
-        
+
         .sidebar-title {
             font-size: 1.2rem;
             font-weight: 600;
@@ -201,17 +204,17 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .sidebar-content {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
         }
-        
+
         .sidebar-section {
             margin-bottom: 25px;
         }
-        
+
         .sidebar-section-title {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -219,12 +222,12 @@
             margin-bottom: 10px;
             letter-spacing: 1px;
         }
-        
+
         .sidebar-footer {
             padding: 15px 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .sidebar-button {
             width: 100%;
             padding: 10px;
@@ -237,11 +240,11 @@
             transition: all 0.2s ease;
             margin-bottom: 10px;
         }
-        
+
         .sidebar-button:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         /* Main Chat Area */
         .chat-main {
             flex: 1;
@@ -251,7 +254,7 @@
             background-size: 20px 20px;
             position: relative;
         }
-        
+
         .chat-header {
             padding: 15px 20px;
             background: rgba(15, 15, 35, 0.8);
@@ -261,17 +264,17 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .chat-title {
             font-size: 1.1rem;
             font-weight: 500;
         }
-        
+
         .chat-actions {
             display: flex;
             gap: 10px;
         }
-        
+
         .chat-action-button {
             width: 32px;
             height: 32px;
@@ -285,11 +288,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .chat-action-button:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .chat-messages {
             flex: 1;
             padding: 20px;
@@ -298,18 +301,18 @@
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .message {
             display: flex;
             gap: 12px;
             max-width: 80%;
         }
-        
+
         .message.user {
             align-self: flex-end;
             flex-direction: row-reverse;
         }
-        
+
         .message-avatar {
             width: 36px;
             height: 36px;
@@ -321,33 +324,33 @@
             font-weight: 600;
             flex-shrink: 0;
         }
-        
+
         .message-avatar.ai {
             background: linear-gradient(135deg, #6B46C1, #A855F7);
         }
-        
+
         .message-content {
             background: rgba(255, 255, 255, 0.05);
             padding: 12px 16px;
             border-radius: 12px;
             position: relative;
         }
-        
+
         .message.user .message-content {
             background: rgba(107, 70, 193, 0.2);
         }
-        
+
         .message-text {
             line-height: 1.5;
         }
-        
+
         .message-time {
             font-size: 0.75rem;
             color: #8B8B8B;
             margin-top: 5px;
             text-align: right;
         }
-        
+
         .chat-input-container {
             padding: 15px 20px;
             background: rgba(15, 15, 35, 0.8);
@@ -356,7 +359,7 @@
             display: flex;
             gap: 10px;
         }
-        
+
         .chat-input {
             flex: 1;
             padding: 12px 16px;
@@ -370,13 +373,14 @@
             max-height: 150px;
             transition: all 0.2s ease;
         }
-        
+
         .chat-input:focus {
             outline: none;
             border-color: #6B46C1;
         }
-        
-        .chat-voice-button, .chat-send-button {
+
+        .chat-voice-button,
+        .chat-send-button {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -386,40 +390,48 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .chat-voice-button {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #FFFFFF;
         }
-        
+
         .chat-voice-button:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .chat-voice-button.active {
             background: #A855F7;
             border-color: #A855F7;
             animation: pulse 1.5s infinite;
         }
-        
+
         .chat-send-button {
             background: linear-gradient(135deg, #6B46C1, #A855F7);
             border: none;
             color: #FFFFFF;
         }
-        
+
         .chat-send-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(107, 70, 193, 0.3);
         }
-        
+
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(168, 85, 247, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+            }
         }
-        
+
         /* Character */
         .character-container {
             position: fixed;
@@ -430,24 +442,24 @@
             z-index: 5;
             pointer-events: none;
         }
-        
+
         /* Settings */
         .settings-section {
             margin-bottom: 20px;
         }
-        
+
         .settings-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
-        
+
         .settings-label {
             font-size: 0.9rem;
             color: #B4B4B4;
         }
-        
+
         .settings-input {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -457,25 +469,25 @@
             font-size: 0.9rem;
             width: 100%;
         }
-        
+
         .settings-input:focus {
             outline: none;
             border-color: #6B46C1;
         }
-        
+
         .toggle-switch {
             position: relative;
             display: inline-block;
             width: 46px;
             height: 24px;
         }
-        
+
         .toggle-switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .toggle-slider {
             position: absolute;
             cursor: pointer;
@@ -487,7 +499,7 @@
             transition: .4s;
             border-radius: 24px;
         }
-        
+
         .toggle-slider:before {
             position: absolute;
             content: "";
@@ -499,15 +511,15 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
-        input:checked + .toggle-slider {
+
+        input:checked+.toggle-slider {
             background-color: #A855F7;
         }
-        
-        input:checked + .toggle-slider:before {
+
+        input:checked+.toggle-slider:before {
             transform: translateX(22px);
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -515,19 +527,19 @@
                 left: -280px;
                 height: 100%;
             }
-            
+
             .sidebar.open {
                 left: 0;
             }
-            
+
             .mobile-menu-button {
                 display: block;
             }
-            
+
             .message {
                 max-width: 90%;
             }
-            
+
             .character-container {
                 width: 120px;
                 height: 120px;
@@ -541,9 +553,12 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <a href="index.html" onclick="localStorage.setItem('forceReload', 'true'); return true;" style="text-decoration: none; display: flex; align-items: center; gap: 0.8rem; cursor: pointer;">
+                <a href="index.html" onclick="localStorage.setItem('forceReload', 'true'); return true;"
+                    style="text-decoration: none; display: flex; align-items: center; gap: 0.8rem; cursor: pointer;">
                     <div class="logo">
-                        <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg" alt="GrokAni Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg"
+                            alt="GrokAni Logo"
+                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                     </div>
                     <span class="brand-name">GrokAni</span>
                 </a>
@@ -566,11 +581,12 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
-                    <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg" alt="GrokAni Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg"
+                        alt="GrokAni Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                 </div>
                 <span class="sidebar-title">GrokAni</span>
             </div>
-            
+
             <div class="sidebar-content">
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">AI Provider</div>
@@ -585,7 +601,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">Voice Settings</div>
                     <div class="settings-section">
@@ -605,24 +621,26 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">API Key</div>
                     <div class="settings-section">
                         <div style="position: relative;">
-                            <input type="password" class="settings-input" id="apiKeyInput" placeholder="Enter your API key">
-                            <button type="button" id="toggleApiKeyVisibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #FFFFFF; font-size: 14px;">👁️</button>
+                            <input type="password" class="settings-input" id="apiKeyInput"
+                                placeholder="Enter your API key">
+                            <button type="button" id="toggleApiKeyVisibility"
+                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #FFFFFF; font-size: 14px;">👁️</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="sidebar-footer">
                 <button class="sidebar-button" id="saveSettingsBtn">Save Settings</button>
                 <button class="sidebar-button" onclick="window.location.href='index.html'">Back to Home</button>
             </div>
         </div>
-        
+
         <!-- Main Chat Area -->
         <div class="chat-main">
             <div class="chat-header">
@@ -632,26 +650,31 @@
                     <button class="chat-action-button" id="clearChatBtn" title="Clear Chat">🗑️</button>
                 </div>
             </div>
-            
+
             <div class="chat-messages" id="chatMessages">
                 <!-- Welcome message -->
                 <div class="message">
                     <div class="message-avatar ai">G</div>
                     <div class="message-content">
-                        <div class="message-text">Hello! I'm GrokAni, your AI voice assistant. How can I help you today?</div>
+                        <div class="message-text">Hello! I'm GrokAni, your AI voice assistant. How can I help you today?
+                        </div>
                         <div class="message-time">Just now</div>
                     </div>
                 </div>
             </div>
-            
-            <div class="chat-input-container" style="position: fixed; bottom: 0; left: 0; right: 0; padding: 15px 20px; background: rgba(15, 15, 35, 0.8); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; z-index: 1000;">
-                <button class="chat-voice-button" id="voiceButton" title="Voice Input" style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #FFFFFF; cursor: pointer;">🎤</button>
-                <textarea class="chat-input" id="messageInput" placeholder="Type your message here..." rows="1" style="flex: 1; padding: 12px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #FFFFFF; font-size: 1rem; resize: none; min-height: 24px;"></textarea>
-                <button class="chat-send-button" id="sendButton" title="Send Message" style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #6B46C1, #A855F7); border: none; color: #FFFFFF; cursor: pointer;">➤</button>
+
+            <div class="chat-input-container"
+                style="position: fixed; bottom: 0; left: 0; right: 0; padding: 15px 20px; background: rgba(15, 15, 35, 0.8); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; z-index: 1000;">
+                <button class="chat-voice-button" id="voiceButton" title="Voice Input"
+                    style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #FFFFFF; cursor: pointer;">🎤</button>
+                <textarea class="chat-input" id="messageInput" placeholder="Type your message here..." rows="1"
+                    style="flex: 1; padding: 12px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #FFFFFF; font-size: 1rem; resize: none; min-height: 24px;"></textarea>
+                <button class="chat-send-button" id="sendButton" title="Send Message"
+                    style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #6B46C1, #A855F7); border: none; color: #FFFFFF; cursor: pointer;">➤</button>
             </div>
         </div>
     </div>
-    
+
     <!-- Character -->
     <div class="character-container">
         <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -670,11 +693,11 @@
                     </feMerge>
                 </filter>
             </defs>
-            
+
             <!-- Character Head -->
             <circle cx="200" cy="200" r="180" fill="#2D1B69" />
             <circle cx="200" cy="200" r="170" fill="url(#characterGrad)" opacity="0.3" />
-            
+
             <!-- Character Face -->
             <g filter="url(#glow)">
                 <!-- Eyes -->
@@ -684,28 +707,32 @@
                 <circle cx="250" cy="170" r="20" fill="#A855F7" opacity="0.3">
                     <animate attributeName="r" values="20;22;20" dur="4s" repeatCount="indefinite" />
                 </circle>
-                
+
                 <circle cx="150" cy="170" r="12" fill="white" />
                 <circle cx="250" cy="170" r="12" fill="white" />
-                
+
                 <circle cx="150" cy="170" r="6" fill="#2D1B69">
                     <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite" />
                 </circle>
                 <circle cx="250" cy="170" r="6" fill="#2D1B69">
                     <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite" />
                 </circle>
-                
+
                 <!-- Mouth -->
                 <path d="M160,230 Q200,250 240,230" stroke="white" stroke-width="4" fill="none" id="mouth">
-                    <animate attributeName="d" values="M160,230 Q200,250 240,230;M160,235 Q200,255 240,235;M160,230 Q200,250 240,230" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="d"
+                        values="M160,230 Q200,250 240,230;M160,235 Q200,255 240,235;M160,230 Q200,250 240,230" dur="3s"
+                        repeatCount="indefinite" />
                 </path>
-                
+
                 <!-- Circuit Lines -->
-                <path d="M120,200 L150,200 L180,220 L220,220 L250,200 L280,200" stroke="#A855F7" stroke-width="2" fill="none" opacity="0.8">
+                <path d="M120,200 L150,200 L180,220 L220,220 L250,200 L280,200" stroke="#A855F7" stroke-width="2"
+                    fill="none" opacity="0.8">
                     <animate attributeName="opacity" values="0.8;0.4;0.8" dur="3s" repeatCount="indefinite" />
                 </path>
-                
-                <path d="M120,240 L150,240 L180,220 L220,220 L250,240 L280,240" stroke="#A855F7" stroke-width="2" fill="none" opacity="0.4">
+
+                <path d="M120,240 L150,240 L180,220 L220,220 L250,240 L280,240" stroke="#A855F7" stroke-width="2"
+                    fill="none" opacity="0.4">
                     <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite" />
                 </path>
             </g>
@@ -718,12 +745,12 @@
             const navLinks = document.querySelector('.nav-links');
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         }
-        
-        document.addEventListener('DOMContentLoaded', function() {
+
+        document.addEventListener('DOMContentLoaded', function () {
             // Load saved settings
             const savedProvider = localStorage.getItem('grokani_provider') || 'openai';
             const savedApiKey = localStorage.getItem('grokani_api_key') || '';
-            
+
             // 显示当前使用的模型提供商
             const providerDisplayNames = {
                 'openai': 'OpenAI',
@@ -733,14 +760,14 @@
                 'ollama': 'Ollama',
                 'deepseek': 'DeepSeek'
             };
-            
+
             // 更新聊天标题以显示当前使用的模型
             const chatTitle = document.querySelector('.chat-title');
             if (chatTitle && savedProvider) {
                 const providerName = providerDisplayNames[savedProvider] || savedProvider;
                 chatTitle.textContent = `Chat with GrokAni (${providerName})`;
             }
-            
+
             // Initialize UI elements
             const sidebar = document.getElementById('sidebar');
             const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
@@ -750,16 +777,16 @@
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
             const chatMessages = document.getElementById('chatMessages');
-            
+
             // Set saved provider and API key in UI
             document.getElementById('providerSelector').value = savedProvider;
             document.getElementById('apiKeyInput').value = savedApiKey;
-            
+
             // 添加API Key可见性切换功能
             const toggleApiKeyVisibilityBtn = document.getElementById('toggleApiKeyVisibility');
             const apiKeyInput = document.getElementById('apiKeyInput');
-            
-            toggleApiKeyVisibilityBtn.addEventListener('click', function() {
+
+            toggleApiKeyVisibilityBtn.addEventListener('click', function () {
                 if (apiKeyInput.type === 'password') {
                     apiKeyInput.type = 'text';
                     toggleApiKeyVisibilityBtn.textContent = '🔒';
@@ -768,7 +795,7 @@
                     toggleApiKeyVisibilityBtn.textContent = '👁️';
                 }
             });
-            
+
             // Check if API key is missing and show warning if needed
             if (!savedApiKey) {
                 const warningMessage = document.createElement('div');
@@ -781,20 +808,20 @@
                     </div>
                 `;
                 chatMessages.appendChild(warningMessage);
-                
+
                 // Open sidebar automatically on mobile
                 if (window.innerWidth <= 768) {
                     sidebar.classList.add('open');
                 }
             }
-            
+
             // Toggle sidebar on mobile
-            toggleSidebarBtn.addEventListener('click', function() {
+            toggleSidebarBtn.addEventListener('click', function () {
                 sidebar.classList.toggle('open');
             });
-            
+
             // 当用户切换提供商时，自动加载对应的API Key
-            document.getElementById('providerSelector').addEventListener('change', function() {
+            document.getElementById('providerSelector').addEventListener('change', function () {
                 const selectedProvider = this.value;
                 // 尝试加载特定于提供商的API Key
                 const providerSpecificKey = localStorage.getItem(selectedProvider + '_api_key');
@@ -804,7 +831,7 @@
                     // 如果没有特定于提供商的API Key，则清空输入框
                     document.getElementById('apiKeyInput').value = '';
                 }
-                
+
                 // 更新聊天标题以显示当前选择的提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -817,21 +844,21 @@
                 const providerName = providerDisplayNames[selectedProvider] || selectedProvider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
             });
-            
+
             // Save settings
-            saveSettingsBtn.addEventListener('click', function() {
+            saveSettingsBtn.addEventListener('click', function () {
                 const provider = document.getElementById('providerSelector').value;
                 const apiKey = document.getElementById('apiKeyInput').value;
-                
+
                 // 保存通用设置
                 localStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
-                
+
                 // 同时保存特定于提供商的API Key
                 if (apiKey) {
                     localStorage.setItem(provider + '_api_key', apiKey);
                 }
-                
+
                 // 更新聊天标题以显示当前提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -843,7 +870,7 @@
                 };
                 const providerName = providerDisplayNames[provider] || provider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
-                
+
                 // 显示保存成功的提示
                 const saveMessage = document.createElement('div');
                 saveMessage.textContent = 'Settings saved successfully!';
@@ -857,22 +884,22 @@
                 saveMessage.style.borderRadius = '8px';
                 saveMessage.style.zIndex = '1000';
                 document.body.appendChild(saveMessage);
-                
+
                 // 2秒后移除提示
                 setTimeout(() => {
                     document.body.removeChild(saveMessage);
                 }, 2000);
-                
+
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
-                }lStorage.setItem('grokani_provider', provider);
+                } lStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
-                
+
                 // 同时保存特定于提供商的API Key
                 if (apiKey) {
                     localStorage.setItem(provider + '_api_key', apiKey);
                 }
-                
+
                 // 更新聊天标题以显示当前提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -884,7 +911,7 @@
                 };
                 const providerName = providerDisplayNames[provider] || provider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
-                
+
                 // 显示保存成功的提示
                 const saveMessage = document.createElement('div');
                 saveMessage.textContent = 'Settings saved successfully!';
@@ -898,22 +925,22 @@
                 saveMessage.style.borderRadius = '8px';
                 saveMessage.style.zIndex = '1000';
                 document.body.appendChild(saveMessage);
-                
+
                 // 2秒后移除提示
                 setTimeout(() => {
                     document.body.removeChild(saveMessage);
                 }, 2000);
-                
+
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
-                }lStorage.setItem('grokani_provider', provider);
+                } lStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
-                
+
                 // 同时保存特定于提供商的API Key
                 if (apiKey) {
                     localStorage.setItem(provider + '_api_key', apiKey);
                 }
-                
+
                 // 更新聊天标题以显示当前提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -925,7 +952,7 @@
                 };
                 const providerName = providerDisplayNames[provider] || provider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
-                
+
                 // 显示保存成功的提示
                 const saveMessage = document.createElement('div');
                 saveMessage.textContent = 'Settings saved successfully!';
@@ -939,22 +966,22 @@
                 saveMessage.style.borderRadius = '8px';
                 saveMessage.style.zIndex = '1000';
                 document.body.appendChild(saveMessage);
-                
+
                 // 2秒后移除提示
                 setTimeout(() => {
                     document.body.removeChild(saveMessage);
                 }, 2000);
-                
+
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
-                }lStorage.setItem('grokani_provider', provider);
+                } lStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
-                
+
                 // 同时保存特定于提供商的API Key
                 if (apiKey) {
                     localStorage.setItem(provider + '_api_key', apiKey);
                 }
-                
+
                 // 更新聊天标题以显示当前提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -966,7 +993,7 @@
                 };
                 const providerName = providerDisplayNames[provider] || provider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
-                
+
                 // 显示保存成功的提示
                 const saveMessage = document.createElement('div');
                 saveMessage.textContent = 'Settings saved successfully!';
@@ -980,22 +1007,22 @@
                 saveMessage.style.borderRadius = '8px';
                 saveMessage.style.zIndex = '1000';
                 document.body.appendChild(saveMessage);
-                
+
                 // 2秒后移除提示
                 setTimeout(() => {
                     document.body.removeChild(saveMessage);
                 }, 2000);
-                
+
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
-                }lStorage.setItem('grokani_provider', provider);
+                } lStorage.setItem('grokani_provider', provider);
                 localStorage.setItem('grokani_api_key', apiKey);
-                
+
                 // 同时保存特定于提供商的API Key
                 if (apiKey) {
                     localStorage.setItem(provider + '_api_key', apiKey);
                 }
-                
+
                 // 更新聊天标题以显示当前提供商
                 const providerDisplayNames = {
                     'openai': 'OpenAI',
@@ -1007,7 +1034,7 @@
                 };
                 const providerName = providerDisplayNames[provider] || provider;
                 document.querySelector('.chat-title').textContent = `Chat with GrokAni (${providerName})`;
-                
+
                 // 显示保存成功的提示
                 const saveMessage = document.createElement('div');
                 saveMessage.textContent = 'Settings saved successfully!';
@@ -1021,19 +1048,19 @@
                 saveMessage.style.borderRadius = '8px';
                 saveMessage.style.zIndex = '1000';
                 document.body.appendChild(saveMessage);
-                
+
                 // 2秒后移除提示
                 setTimeout(() => {
                     document.body.removeChild(saveMessage);
                 }, 2000);
-                
+
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('open');
                 }
             });
-            
+
             // Clear chat
-            clearChatBtn.addEventListener('click', function() {
+            clearChatBtn.addEventListener('click', function () {
                 if (confirm('Are you sure you want to clear the chat history?')) {
                     // Keep only the first welcome message
                     const welcomeMessage = chatMessages.firstElementChild;
@@ -1041,9 +1068,9 @@
                     chatMessages.appendChild(welcomeMessage);
                 }
             });
-            
+
             // Voice input toggle
-            voiceButton.addEventListener('click', function() {
+            voiceButton.addEventListener('click', function () {
                 this.classList.toggle('active');
                 if (this.classList.contains('active')) {
                     // Start voice recognition (mock)
@@ -1056,28 +1083,28 @@
                     // Stop voice recognition
                 }
             });
-            
+
             // Auto-resize textarea
-            messageInput.addEventListener('input', function() {
+            messageInput.addEventListener('input', function () {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
             });
-            
+
             // Send message
             function sendMessage() {
                 const message = messageInput.value.trim();
                 if (message) {
                     // Add user message
                     addMessage(message, 'user');
-                    
+
                     // Clear input
                     messageInput.value = '';
                     messageInput.style.height = 'auto';
-                    
+
                     // Simulate AI response after a short delay
                     setTimeout(() => {
                         simulateTyping();
-                        
+
                         // After "typing", show the response
                         setTimeout(() => {
                             // Remove typing indicator
@@ -1085,7 +1112,7 @@
                             if (typingIndicator) {
                                 typingIndicator.remove();
                             }
-                            
+
                             const responses = [
                                 "I understand what you're saying. Can you tell me more?",
                                 "That's interesting! Let me think about that for a moment...",
@@ -1095,89 +1122,89 @@
                             ];
                             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
                             addMessage(randomResponse, 'ai');
-                            
+
                             // Animate character mouth when speaking
                             animateCharacterSpeaking();
                         }, 1500);
                     }, 500);
                 }
             }
-            
+
             // Send button click
             sendButton.addEventListener('click', sendMessage);
-            
+
             // Enter key to send
-            messageInput.addEventListener('keydown', function(e) {
+            messageInput.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     sendMessage();
                 }
             });
-            
+
             // Add message to chat
             function addMessage(text, sender) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${sender}`;
-                
+
                 const avatar = document.createElement('div');
                 avatar.className = `message-avatar ${sender}`;
                 avatar.textContent = sender === 'user' ? 'U' : 'G';
-                
+
                 const content = document.createElement('div');
                 content.className = 'message-content';
-                
+
                 const messageText = document.createElement('div');
                 messageText.className = 'message-text';
                 messageText.textContent = text;
-                
+
                 const time = document.createElement('div');
                 time.className = 'message-time';
                 time.textContent = 'Just now';
-                
+
                 content.appendChild(messageText);
                 content.appendChild(time);
-                
+
                 messageDiv.appendChild(avatar);
                 messageDiv.appendChild(content);
-                
+
                 chatMessages.appendChild(messageDiv);
-                
+
                 // Scroll to bottom
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-            
+
             // Simulate typing indicator
             function simulateTyping() {
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'message';
                 typingDiv.id = 'typing-indicator';
-                
+
                 const avatar = document.createElement('div');
                 avatar.className = 'message-avatar ai';
                 avatar.textContent = 'G';
-                
+
                 const content = document.createElement('div');
                 content.className = 'message-content';
-                
+
                 const typingDots = document.createElement('div');
                 typingDots.className = 'message-text';
                 typingDots.innerHTML = '<span class="typing-dot">.</span><span class="typing-dot">.</span><span class="typing-dot">.</span>';
-                
+
                 content.appendChild(typingDots);
-                
+
                 typingDiv.appendChild(avatar);
                 typingDiv.appendChild(content);
-                
+
                 chatMessages.appendChild(typingDiv);
-                
+
                 // Scroll to bottom
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-            
+
             // Animate character speaking
             function animateCharacterSpeaking() {
                 const mouth = document.getElementById('mouth');
-                
+
                 // More pronounced animation
                 const animation = mouth.animate([
                     { d: 'path("M160,230 Q200,250 240,230")' },

@@ -126,8 +126,8 @@
                 <div class="character-container" style="position: relative; margin-top: 40px;">
                     <div class="character-image-container" style="width: 360px; height: 640px; border-radius: 30px; overflow: hidden; position: relative; box-shadow: 0 20px 60px rgba(107, 70, 193, 0.4); border: 3px solid rgba(168, 85, 247, 0.5);">
                         <!-- 图片1 -->
-                        <img src="https://imgur.com/0DVHMPC.jpg" alt="Ani Wallpaper 1" class="ani-wallpaper active"
-                            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 1.5s ease-in-out; z-index: 1; border-radius: 0;">
+                        <img src="https://imgur.com/0DVHMPC.jpg" alt="Ani Wallpaper 1" class="ani-wallpaper"
+                            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1; border-radius: 0;">
                         <!-- 图片2 -->
                         <img src="https://imgur.com/i4DXike.jpg" alt="Ani Wallpaper 2" class="ani-wallpaper"
                             style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1; border-radius: 0;">
@@ -872,21 +872,22 @@
         // 壁纸轮播功能
         function initWallpaperRotation() {
             const wallpapers = document.querySelectorAll('.ani-wallpaper');
-            if (wallpapers.length === 0) return;
+            console.log('GrokAni Debug: initWallpaperRotation called. Total wallpapers found:', wallpapers.length); // 调试日志
+            if (wallpapers.length === 0) {
+                console.warn('GrokAni Debug: No wallpapers found to rotate.'); // 调试日志
+                return;
+            }
             
-            // 初始随机选择一张壁纸
-            let currentIndex = Math.floor(Math.random() * wallpapers.length);
+            // 确保第一张壁纸默认显示，我们将初始索引设置为0
+            let currentIndex = 0; // 修改：从第一张壁纸开始 (索引为0)
+            console.log('GrokAni Debug: Initial wallpaper index set to:', currentIndex); // 调试日志
             showWallpaper(currentIndex);
             
             // 每30秒切换一次壁纸
             setInterval(() => {
-                // 随机选择下一张壁纸（确保不是当前显示的）
-                let nextIndex;
-                do {
-                    nextIndex = Math.floor(Math.random() * wallpapers.length);
-                } while (nextIndex === currentIndex && wallpapers.length > 1);
-                
-                currentIndex = nextIndex;
+                // 顺序切换到下一张壁纸。如果当前是最后一张，则回到第一张（通过模运算实现）
+                currentIndex = (currentIndex + 1) % wallpapers.length; // 修改：实现顺序轮播
+                console.log('GrokAni Debug: Switching to next wallpaper. New index:', currentIndex); // 调试日志
                 showWallpaper(currentIndex);
             }, 30000); // 30秒
         }
@@ -894,6 +895,8 @@
         // 显示指定索引的壁纸
         function showWallpaper(index) {
             const wallpapers = document.querySelectorAll('.ani-wallpaper');
+            // 记录正在尝试显示的壁纸URL，以便我们知道是哪一张
+            console.log('GrokAni Debug: showWallpaper called for index:', index, 'URL:', wallpapers[index] ? wallpapers[index].src : 'N/A'); // 调试日志
             
             // 隐藏所有壁纸
             wallpapers.forEach(wallpaper => {
@@ -902,8 +905,13 @@
             });
             
             // 显示选中的壁纸
-            wallpapers[index].classList.add('active');
-            wallpapers[index].style.opacity = '1';
+            if (wallpapers[index]) { // 确保索引有效
+                wallpapers[index].classList.add('active');
+                wallpapers[index].style.opacity = '1';
+                console.log('GrokAni Debug: Successfully applied styles to wallpaper at index:', index); // 调试日志
+            } else {
+                console.error('GrokAni Debug: Error: Wallpaper at index', index, 'does not exist.'); // 调试日志
+            }
         }
     </script>
 </body>
