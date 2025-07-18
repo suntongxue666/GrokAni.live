@@ -436,8 +436,19 @@
         function startChatProcess() {
             console.log('Starting chat process...');
             
-            // 创建模型选择对话框
-            showModelSelectionDialog();
+            // 检查是否已经有保存的API Key
+            const savedApiKey = localStorage.getItem('grokani_api_key');
+            const savedProvider = localStorage.getItem('grokani_provider');
+            
+            if (savedApiKey && savedApiKey.trim() !== '' && savedProvider) {
+                // 如果API key和提供商都已存在，直接进入聊天页面
+                console.log('API key and provider found, redirecting to chat page');
+                window.location.href = 'chat.html';
+            } else {
+                // 如果没有API key或提供商，显示模型选择对话框
+                console.log('API key or provider not found, showing model selection dialog');
+                showModelSelectionDialog();
+            }
         }
         
         // 显示模型选择对话框
