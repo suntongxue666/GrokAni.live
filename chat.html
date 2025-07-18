@@ -606,7 +606,10 @@
                 <div class="sidebar-section">
                     <div class="sidebar-section-title">API Key</div>
                     <div class="settings-section">
-                        <input type="password" class="settings-input" id="apiKeyInput" placeholder="Enter your API key">
+                        <div style="position: relative;">
+                            <input type="password" class="settings-input" id="apiKeyInput" placeholder="Enter your API key">
+                            <button type="button" id="toggleApiKeyVisibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #FFFFFF; font-size: 14px;">👁️</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -727,6 +730,43 @@
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
             const chatMessages = document.getElementById('chatMessages');
+            
+            // Set saved provider and API key in UI
+            document.getElementById('providerSelector').value = savedProvider;
+            document.getElementById('apiKeyInput').value = savedApiKey;
+            
+            // 添加API Key可见性切换功能
+            const toggleApiKeyVisibilityBtn = document.getElementById('toggleApiKeyVisibility');
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            
+            toggleApiKeyVisibilityBtn.addEventListener('click', function() {
+                if (apiKeyInput.type === 'password') {
+                    apiKeyInput.type = 'text';
+                    toggleApiKeyVisibilityBtn.textContent = '🔒';
+                } else {
+                    apiKeyInput.type = 'password';
+                    toggleApiKeyVisibilityBtn.textContent = '👁️';
+                }
+            });
+            
+            // Check if API key is missing and show warning if needed
+            if (!savedApiKey) {
+                const warningMessage = document.createElement('div');
+                warningMessage.className = 'message';
+                warningMessage.innerHTML = `
+                    <div class="message-avatar ai">G</div>
+                    <div class="message-content">
+                        <div class="message-text">⚠️ No API key detected. Please set your API key in the settings panel to use GrokAni.</div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                `;
+                chatMessages.appendChild(warningMessage);
+                
+                // Open sidebar automatically on mobile
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.add('open');
+                }
+            }
             
             // Toggle sidebar on mobile
             toggleSidebarBtn.addEventListener('click', function() {

@@ -135,7 +135,7 @@
                         <img src="https://imgur.com/mm3gcLl.jpg" alt="Ani Wallpaper 3" class="ani-wallpaper"
                             style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1; border-radius: 0;">
                     </div>
-                    <a href="#" class="wallpaper-banner" style="position: absolute; bottom: 40px; left: 0; right: 0; background: rgba(107, 70, 193, 0.7); color: white; text-align: center; padding: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(5px); z-index: 101; margin: 0 20px; border-radius: 30px;" onclick="loadWallpaperAd(event)">
+                    <a href="wallpapers.html" class="wallpaper-banner" style="position: absolute; bottom: 40px; left: 0; right: 0; background: rgba(107, 70, 193, 0.7); color: white; text-align: center; padding: 12px; font-weight: 600; text-decoration: none; backdrop-filter: blur(5px); z-index: 101; margin: 0 20px; border-radius: 30px;" onclick="loadWallpaperAd(event)">
                         View Ani Wallpapers
                     </a>
                 </div>
@@ -331,16 +331,32 @@
     <script src="script.js"></script>
     <script>
         // 加载壁纸页面广告脚本函数
-        function loadAdScript(event) {
+        function loadWallpaperAd(event) {
+            // 创建一个计时器，在一定时间后自动跳转到壁纸页面（如果广告没有正常加载）
+            var adTimeout = setTimeout(function() {
+                window.location.href = 'wallpapers.html';
+            }, 2000); // 2秒后自动跳转
+            
+            // 保存计时器ID，以便在广告加载成功时清除
+            window.wallpaperAdTimeoutId = adTimeout;
+            
             // 加载广告脚本
+            var adScript = document.createElement('script');
+            
+            // 使用匿名函数包装广告代码，以便在移动端也能正常工作
             (function(d,z,s){
                 s.src='https://'+d+'/401/'+z;
                 try{
-                    (document.body||document.documentElement).appendChild(s)
-                }catch(e){}
-            })('groleegni.net',9588029,document.createElement('script'));
+                    (document.body||document.documentElement).appendChild(s);
+                }catch(e){
+                    console.error('Error loading wallpaper ad:', e);
+                    // 如果广告加载失败，立即跳转到壁纸页面
+                    window.location.href = 'wallpapers.html';
+                }
+            })('groleegni.net',9588029,adScript);
             
-            // 不阻止默认行为，允许链接正常跳转
+            // 阻止默认行为，由我们控制跳转
+            event.preventDefault();
         }
         
         // 加载开始聊天广告脚本函数
@@ -412,6 +428,17 @@
         
         // 显示模型选择对话框
         function showModelSelectionDialog() {
+            // 创建半透明背景遮罩
+            var overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // 50%透明度
+            overlay.style.zIndex = '999';
+            document.body.appendChild(overlay);
+            
             // 创建对话框元素
             var dialog = document.createElement('div');
             dialog.className = 'model-selection-dialog';
@@ -426,6 +453,8 @@
             dialog.style.zIndex = '1000';
             dialog.style.maxWidth = '90%';
             dialog.style.width = '400px';
+            dialog.style.maxHeight = '80vh';
+            dialog.style.overflowY = 'auto';
             
             // 添加标题
             var title = document.createElement('h3');
@@ -434,11 +463,14 @@
             title.style.color = 'var(--text-primary, #ffffff)';
             dialog.appendChild(title);
             
-            // 添加模型选项
+            // 添加模型选项 - 增加到6个
             var models = [
-                { name: 'OpenAI GPT', icon: '🤖' },
-                { name: 'Anthropic Claude', icon: '🎭' },
-                { name: 'Google Gemini', icon: '💎' }
+                { name: 'OpenAI GPT-4', icon: '🤖', provider: 'openai' },
+                { name: 'OpenAI GPT-3.5', icon: '🤖', provider: 'openai' },
+                { name: 'Anthropic Claude 3', icon: '🎭', provider: 'anthropic' },
+                { name: 'Anthropic Claude 2', icon: '🎭', provider: 'anthropic' },
+                { name: 'Google Gemini Pro', icon: '💎', provider: 'google' },
+                { name: 'Google Gemini Flash', icon: '💎', provider: 'google' }
             ];
             
             models.forEach(function(model) {
@@ -501,9 +533,250 @@
         function startChatWithModel(modelName) {
             console.log('Starting chat with ' + modelName);
             
-            // 这里可以添加实际的聊天功能启动代码
-            // 例如重定向到聊天页面
-            window.location.href = 'chat.html?model=' + encodeURIComponent(modelName);
+            // 获取模型提供商
+            let provider = '';
+            if (modelName.includes('GPT')) {
+                provider = 'openai';
+            } else if (modelName.includes('Claude')) {
+                provider = 'anthropic';
+            } else if (modelName.includes('Gemini')) {
+                provider = 'google';
+            }
+            
+            // 显示API Key输入对话框
+            showApiKeyDialog(modelName, provider);
+        }
+        
+        // 显示API Key输入对话框
+        function showApiKeyDialog(modelName, provider) {
+            // 创建半透明背景遮罩
+            var overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // 50%透明度
+            overlay.style.zIndex = '999';
+            document.body.appendChild(overlay);
+            
+            // 创建对话框元素
+            var dialog = document.createElement('div');
+            dialog.className = 'api-key-dialog';
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = 'var(--card-bg, #1a1a2e)';
+            dialog.style.borderRadius = 'var(--border-radius, 12px)';
+            dialog.style.padding = '20px';
+            dialog.style.boxShadow = 'var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.5))';
+            dialog.style.zIndex = '1000';
+            dialog.style.maxWidth = '90%';
+            dialog.style.width = '400px';
+            
+            // 添加标题
+            var title = document.createElement('h3');
+            title.textContent = 'Enter ' + getProviderName(provider) + ' API Key';
+            title.style.marginTop = '0';
+            title.style.color = 'var(--text-primary, #ffffff)';
+            dialog.appendChild(title);
+            
+            // 添加描述
+            var description = document.createElement('p');
+            description.textContent = 'To use ' + modelName + ', you need to provide your API key. Your key is stored locally and never sent to our servers.';
+            description.style.color = 'var(--text-secondary, #a0a0c0)';
+            description.style.marginBottom = '20px';
+            dialog.appendChild(description);
+            
+            // 添加API Key输入框
+            var inputContainer = document.createElement('div');
+            inputContainer.style.marginBottom = '20px';
+            
+            var label = document.createElement('label');
+            label.textContent = 'API Key:';
+            label.style.display = 'block';
+            label.style.marginBottom = '8px';
+            label.style.color = 'var(--text-primary, #ffffff)';
+            inputContainer.appendChild(label);
+            
+            var input = document.createElement('input');
+            input.type = 'password';
+            input.placeholder = 'Enter your ' + getProviderName(provider) + ' API key';
+            input.style.width = '100%';
+            input.style.padding = '10px';
+            input.style.borderRadius = 'var(--border-radius-small, 8px)';
+            input.style.border = '1px solid var(--card-border, #444464)';
+            input.style.backgroundColor = 'var(--input-bg, #252547)';
+            input.style.color = 'var(--text-primary, #ffffff)';
+            input.style.marginBottom = '10px';
+            inputContainer.appendChild(input);
+            
+            // 添加显示/隐藏API Key的复选框
+            var showKeyContainer = document.createElement('div');
+            showKeyContainer.style.display = 'flex';
+            showKeyContainer.style.alignItems = 'center';
+            
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'show-api-key';
+            checkbox.style.marginRight = '8px';
+            showKeyContainer.appendChild(checkbox);
+            
+            var checkboxLabel = document.createElement('label');
+            checkboxLabel.htmlFor = 'show-api-key';
+            checkboxLabel.textContent = 'Show API Key';
+            checkboxLabel.style.color = 'var(--text-secondary, #a0a0c0)';
+            showKeyContainer.appendChild(checkboxLabel);
+            
+            // 添加显示/隐藏API Key的功能
+            checkbox.addEventListener('change', function() {
+                input.type = this.checked ? 'text' : 'password';
+            });
+            
+            inputContainer.appendChild(showKeyContainer);
+            dialog.appendChild(inputContainer);
+            
+            // 添加"Remember this key"复选框
+            var rememberContainer = document.createElement('div');
+            rememberContainer.style.display = 'flex';
+            rememberContainer.style.alignItems = 'center';
+            rememberContainer.style.marginBottom = '20px';
+            
+            var rememberCheckbox = document.createElement('input');
+            rememberCheckbox.type = 'checkbox';
+            rememberCheckbox.id = 'remember-api-key';
+            rememberCheckbox.checked = true;
+            rememberCheckbox.style.marginRight = '8px';
+            rememberContainer.appendChild(rememberCheckbox);
+            
+            var rememberLabel = document.createElement('label');
+            rememberLabel.htmlFor = 'remember-api-key';
+            rememberLabel.textContent = 'Remember this key';
+            rememberLabel.style.color = 'var(--text-secondary, #a0a0c0)';
+            rememberContainer.appendChild(rememberLabel);
+            
+            dialog.appendChild(rememberContainer);
+            
+            // 添加按钮容器
+            var buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.justifyContent = 'space-between';
+            buttonContainer.style.gap = '10px';
+            
+            // 添加取消按钮
+            var cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.style.flex = '1';
+            cancelButton.style.backgroundColor = 'transparent';
+            cancelButton.style.border = '1px solid var(--card-border, #444464)';
+            cancelButton.style.color = 'var(--text-secondary, #a0a0c0)';
+            cancelButton.style.padding = '10px';
+            cancelButton.style.borderRadius = 'var(--border-radius-small, 8px)';
+            cancelButton.style.cursor = 'pointer';
+            
+            cancelButton.onclick = function() {
+                document.body.removeChild(overlay);
+                document.body.removeChild(dialog);
+            };
+            
+            buttonContainer.appendChild(cancelButton);
+            
+            // 添加继续按钮
+            var continueButton = document.createElement('button');
+            continueButton.textContent = 'Continue';
+            continueButton.style.flex = '1';
+            continueButton.style.backgroundColor = 'var(--primary-purple, #6B46C1)';
+            continueButton.style.border = 'none';
+            continueButton.style.color = 'white';
+            continueButton.style.padding = '10px';
+            continueButton.style.borderRadius = 'var(--border-radius-small, 8px)';
+            continueButton.style.cursor = 'pointer';
+            
+            continueButton.onclick = function() {
+                var apiKey = input.value.trim();
+                if (apiKey) {
+                    // 如果选择记住API Key，则保存到localStorage
+                    if (rememberCheckbox.checked) {
+                        localStorage.setItem(provider + '_api_key', apiKey);
+                    }
+                    
+                    // 关闭对话框
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(dialog);
+                    
+                    // 跳转到聊天页面
+                    window.location.href = 'chat.html?model=' + encodeURIComponent(modelName) + '&provider=' + encodeURIComponent(provider) + '&apiKey=' + encodeURIComponent(apiKey);
+                } else {
+                    // 显示错误消息
+                    input.style.border = '1px solid red';
+                    var errorMsg = document.createElement('p');
+                    errorMsg.textContent = 'Please enter a valid API key';
+                    errorMsg.style.color = 'red';
+                    errorMsg.style.margin = '5px 0';
+                    
+                    // 如果已经有错误消息，则不再添加
+                    if (!document.querySelector('.api-key-error')) {
+                        errorMsg.className = 'api-key-error';
+                        inputContainer.insertBefore(errorMsg, showKeyContainer);
+                    }
+                }
+            };
+            
+            buttonContainer.appendChild(continueButton);
+            dialog.appendChild(buttonContainer);
+            
+            // 添加"Get API Key"链接
+            var getKeyLink = document.createElement('a');
+            getKeyLink.textContent = 'Don\'t have an API key? Get one here';
+            getKeyLink.href = getApiKeyUrl(provider);
+            getKeyLink.target = '_blank';
+            getKeyLink.style.display = 'block';
+            getKeyLink.style.textAlign = 'center';
+            getKeyLink.style.marginTop = '15px';
+            getKeyLink.style.color = 'var(--accent-purple, #8B5CF6)';
+            getKeyLink.style.textDecoration = 'none';
+            dialog.appendChild(getKeyLink);
+            
+            // 添加到页面
+            document.body.appendChild(dialog);
+            
+            // 自动填充已保存的API Key
+            var savedApiKey = localStorage.getItem(provider + '_api_key');
+            if (savedApiKey) {
+                input.value = savedApiKey;
+            }
+            
+            // 聚焦到输入框
+            input.focus();
+        }
+        
+        // 获取提供商名称
+        function getProviderName(provider) {
+            switch (provider) {
+                case 'openai':
+                    return 'OpenAI';
+                case 'anthropic':
+                    return 'Anthropic';
+                case 'google':
+                    return 'Google';
+                default:
+                    return 'API';
+            }
+        }
+        
+        // 获取API Key URL
+        function getApiKeyUrl(provider) {
+            switch (provider) {
+                case 'openai':
+                    return 'https://platform.openai.com/api-keys';
+                case 'anthropic':
+                    return 'https://console.anthropic.com/account/keys';
+                case 'google':
+                    return 'https://makersuite.google.com/app/apikey';
+                default:
+                    return '#';
+            }
         }
         
         // 确保图片正确加载

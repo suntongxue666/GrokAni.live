@@ -11,12 +11,15 @@ function toggleMobileMenu() {
 function startChat() {
     // Check if API key is already set in localStorage
     const savedApiKey = localStorage.getItem('grokani_api_key');
+    const savedProvider = localStorage.getItem('grokani_provider');
     
-    if (savedApiKey && savedApiKey.trim() !== '') {
-        // If API key exists, go directly to chat page
+    if (savedApiKey && savedApiKey.trim() !== '' && savedProvider) {
+        // 如果API key和提供商都已存在，直接进入聊天页面
+        console.log('API key and provider found, redirecting to chat page');
         window.location.href = 'chat.html';
     } else {
-        // If no API key, go to models selection page
+        // 如果没有API key或提供商，先进入模型选择页面
+        console.log('API key or provider not found, redirecting to models page');
         window.location.href = 'models.html';
     }
 }

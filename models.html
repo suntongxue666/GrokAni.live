@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GrokAni - Choose an AI Provider</title>
-    <meta name="description"
-        content="Select your preferred AI provider for GrokAni voice assistant.">
+    <meta name="description" content="Select your preferred AI provider for GrokAni voice assistant.">
     <meta name="keywords"
         content="AI voice assistant, artificial intelligence, voice chat, GPT, Claude, Gemini, voice synthesis, conversational AI">
     <meta name="author" content="GrokAni Team">
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
-    
+    <link rel="icon" type="image/jpeg"
+        href="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg">
+
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZLXDV99EC"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        
+
         gtag('config', 'G-5ZLXDV99EC');
     </script>
     <style>
@@ -36,7 +36,7 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
-        
+
         .modal-container {
             position: relative;
             width: 100%;
@@ -44,21 +44,21 @@
             margin: 20px;
             z-index: 10;
         }
-        
+
         .modal {
             background: white;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         .modal-header {
             padding: 20px;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #eee;
         }
-        
+
         .back-button {
             background: none;
             border: none;
@@ -67,23 +67,23 @@
             margin-right: 10px;
             color: #333;
         }
-        
+
         .modal-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: #333;
         }
-        
+
         .modal-content {
             padding: 20px;
         }
-        
+
         .provider-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
-        
+
         .provider-option {
             border: 1px solid #eee;
             border-radius: 8px;
@@ -92,39 +92,39 @@
             transition: all 0.2s ease;
             position: relative;
         }
-        
+
         .provider-option:hover {
             border-color: #6B46C1;
             box-shadow: 0 2px 8px rgba(107, 70, 193, 0.1);
         }
-        
+
         .provider-option.selected {
             border-color: #6B46C1;
             background-color: rgba(107, 70, 193, 0.05);
         }
-        
+
         .provider-option input[type="radio"] {
             position: absolute;
             opacity: 0;
         }
-        
+
         .provider-name {
             font-weight: 500;
             margin-bottom: 5px;
             color: #333;
         }
-        
+
         .provider-url {
             font-size: 0.8rem;
             color: #666;
         }
-        
+
         .modal-footer {
             padding: 15px 20px;
             border-top: 1px solid #eee;
             text-align: right;
         }
-        
+
         .next-button {
             background: #6B46C1;
             color: white;
@@ -135,16 +135,16 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .next-button:hover {
             background: #8B5CF6;
         }
-        
+
         .next-button:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
-        
+
         .character-background {
             position: fixed;
             bottom: 0;
@@ -156,13 +156,13 @@
             justify-content: center;
             pointer-events: none;
         }
-        
+
         .character-image {
             height: 90vh;
             max-height: 800px;
             opacity: 0.2;
         }
-        
+
         /* API Key Modal */
         .api-key-modal {
             display: none;
@@ -176,7 +176,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .api-key-container {
             background: white;
             border-radius: 16px;
@@ -184,24 +184,24 @@
             max-width: 500px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .api-key-header {
             padding: 20px;
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
         }
-        
+
         .api-key-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: #333;
         }
-        
+
         .api-key-content {
             padding: 20px;
         }
-        
+
         .api-key-input {
             width: 100%;
             padding: 12px;
@@ -210,13 +210,13 @@
             font-size: 1rem;
             margin-bottom: 15px;
         }
-        
+
         .api-key-input:focus {
             outline: none;
             border-color: #6B46C1;
             box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.1);
         }
-        
+
         .api-key-help {
             display: flex;
             justify-content: space-between;
@@ -224,23 +224,23 @@
             margin-bottom: 20px;
             font-size: 0.9rem;
         }
-        
+
         .api-key-link {
             color: #6B46C1;
             text-decoration: none;
         }
-        
+
         .api-key-link:hover {
             text-decoration: underline;
         }
-        
+
         .api-key-footer {
             padding: 15px 20px;
             border-top: 1px solid #eee;
             display: flex;
             justify-content: space-between;
         }
-        
+
         .cancel-button {
             background: #f5f5f5;
             color: #333;
@@ -250,11 +250,11 @@
             font-weight: 500;
             cursor: pointer;
         }
-        
+
         .cancel-button:hover {
             background: #eee;
         }
-        
+
         .save-button {
             background: #6B46C1;
             color: white;
@@ -264,16 +264,16 @@
             font-weight: 500;
             cursor: pointer;
         }
-        
+
         .save-button:hover {
             background: #8B5CF6;
         }
-        
+
         .save-button:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
-        
+
         @media (max-width: 600px) {
             .provider-grid {
                 grid-template-columns: 1fr;
@@ -285,7 +285,8 @@
 <body>
     <div class="character-background">
         <div class="character-image">
-            <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg" alt="GrokAni" style="height: 90vh; max-height: 800px; opacity: 0.2; border-radius: 50%;">
+            <img src="https://ciwjjfcuhubjydajazkk.supabase.co/storage/v1/object/public/webstie-icon//GrokAni.jpg"
+                alt="GrokAni" style="height: 90vh; max-height: 800px; opacity: 0.2; border-radius: 50%;">
         </div>
     </div>
 
@@ -295,7 +296,7 @@
                 <button class="back-button" onclick="window.location.href='index.html'">←</button>
                 <div class="modal-title">Choose an AI Provider</div>
             </div>
-            
+
             <div class="modal-content">
                 <div class="provider-grid">
                     <label class="provider-option" onclick="selectProvider('openai')">
@@ -303,31 +304,31 @@
                         <div class="provider-name">OpenAI</div>
                         <div class="provider-url">openai.com</div>
                     </label>
-                    
+
                     <label class="provider-option" onclick="selectProvider('anthropic')">
                         <input type="radio" name="provider" value="anthropic">
                         <div class="provider-name">Anthropic</div>
                         <div class="provider-url">anthropic.com</div>
                     </label>
-                    
+
                     <label class="provider-option" onclick="selectProvider('google')">
                         <input type="radio" name="provider" value="google">
                         <div class="provider-name">Google Gemini</div>
                         <div class="provider-url">gemini.google.com</div>
                     </label>
-                    
+
                     <label class="provider-option" onclick="selectProvider('openrouter')">
                         <input type="radio" name="provider" value="openrouter">
                         <div class="provider-name">OpenRouter</div>
                         <div class="provider-url">openrouter.ai</div>
                     </label>
-                    
+
                     <label class="provider-option" onclick="selectProvider('ollama')">
                         <input type="radio" name="provider" value="ollama">
                         <div class="provider-name">Ollama</div>
                         <div class="provider-url">ollama.ai</div>
                     </label>
-                    
+
                     <label class="provider-option" onclick="selectProvider('deepseek')">
                         <input type="radio" name="provider" value="deepseek">
                         <div class="provider-name">DeepSeek</div>
@@ -335,29 +336,34 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="modal-footer">
                 <button class="next-button" id="nextButton" disabled onclick="showApiKeyModal()">Next</button>
             </div>
         </div>
     </div>
-    
+
     <!-- API Key Modal -->
     <div class="api-key-modal" id="apiKeyModal">
         <div class="api-key-container">
             <div class="api-key-header">
                 <div class="api-key-title">Enter API Key</div>
             </div>
-            
+
             <div class="api-key-content">
-                <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Enter your API key here..." oninput="checkApiKey()">
-                
+                <div style="position: relative;">
+                    <input type="password" class="api-key-input" id="apiKeyInput"
+                        placeholder="Enter your API key here..." oninput="checkApiKey()">
+                    <button type="button" id="toggleVisibility"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6B46C1;">👁️</button>
+                </div>
+
                 <div class="api-key-help">
                     <span id="apiKeyHelp">Don't have an API key?</span>
                     <a href="#" class="api-key-link" id="getApiKeyLink" target="_blank">Get API Key →</a>
                 </div>
             </div>
-            
+
             <div class="api-key-footer">
                 <button class="cancel-button" onclick="hideApiKeyModal()">Cancel</button>
                 <button class="save-button" id="saveButton" disabled onclick="saveAndContinue()">Continue</button>
@@ -375,47 +381,81 @@
             'ollama': 'https://ollama.ai',
             'deepseek': 'https://platform.deepseek.com/'
         };
-        
+
+        // 添加API Key可见性切换功能
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleVisibilityBtn = document.getElementById('toggleVisibility');
+            const apiKeyInput = document.getElementById('apiKeyInput');
+
+            toggleVisibilityBtn.addEventListener('click', function () {
+                if (apiKeyInput.type === 'password') {
+                    apiKeyInput.type = 'text';
+                    toggleVisibilityBtn.textContent = '🔒';
+                } else {
+                    apiKeyInput.type = 'password';
+                    toggleVisibilityBtn.textContent = '👁️';
+                }
+            });
+        });
+
         function selectProvider(provider) {
             selectedProvider = provider;
-            
+
             // Update UI to show selected provider
             const options = document.querySelectorAll('.provider-option');
             options.forEach(option => option.classList.remove('selected'));
-            
+
             const selectedOption = document.querySelector(`.provider-option input[value="${provider}"]`).parentNode;
             selectedOption.classList.add('selected');
-            
+
             // Enable next button
             document.getElementById('nextButton').disabled = false;
         }
-        
+
         function showApiKeyModal() {
             document.getElementById('apiKeyModal').style.display = 'flex';
             document.getElementById('apiKeyInput').focus();
-            
+
             // Update API key link
             document.getElementById('getApiKeyLink').href = apiKeyLinks[selectedProvider];
         }
-        
+
         function hideApiKeyModal() {
             document.getElementById('apiKeyModal').style.display = 'none';
         }
-        
+
         function checkApiKey() {
             const apiKey = document.getElementById('apiKeyInput').value.trim();
             document.getElementById('saveButton').disabled = apiKey.length < 5;
         }
-        
+
         function saveAndContinue() {
             const apiKey = document.getElementById('apiKeyInput').value.trim();
-            
+
             // Save provider and API key to localStorage
             localStorage.setItem('grokani_provider', selectedProvider);
             localStorage.setItem('grokani_api_key', apiKey);
-            
-            // Redirect to chat page
-            window.location.href = 'chat.html';
+
+            // 添加保存成功的提示
+            const saveMessage = document.createElement('div');
+            saveMessage.textContent = 'API Key saved successfully!';
+            saveMessage.style.position = 'fixed';
+            saveMessage.style.top = '20px';
+            saveMessage.style.left = '50%';
+            saveMessage.style.transform = 'translateX(-50%)';
+            saveMessage.style.backgroundColor = '#6B46C1';
+            saveMessage.style.color = 'white';
+            saveMessage.style.padding = '10px 20px';
+            saveMessage.style.borderRadius = '8px';
+            saveMessage.style.zIndex = '1000';
+            document.body.appendChild(saveMessage);
+
+            // 1秒后移除提示并跳转
+            setTimeout(() => {
+                document.body.removeChild(saveMessage);
+                // Redirect to chat page
+                window.location.href = 'chat.html';
+            }, 1000);
         }
     </script>
 </body>
