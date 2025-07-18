@@ -332,104 +332,116 @@
     <script>
         // 加载壁纸页面广告脚本函数
         function loadWallpaperAd(event) {
-            // 检测是否为移动设备
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            // 阻止默认行为，防止广告脚本加载前跳转
+            event.preventDefault(); 
+            console.log('GrokAni Action: Bypassing wallpaper ad and redirecting to wallpapers page.');
+            // 直接跳转到壁纸页面，不再加载广告
+            window.location.href = 'wallpapers.html';
             
-            // 如果是移动设备，直接跳转到壁纸页面
-            if (isMobile) {
-                console.log('Mobile device detected, skipping ad and redirecting to wallpapers page');
-                window.location.href = 'wallpapers.html';
-                event.preventDefault();
-                return;
-            }
+            // // 以下是被屏蔽的广告代码，不再执行
+            // // 检测是否为移动设备
+            // const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // PC端显示广告
-            console.log('Desktop device detected, showing ad before redirecting');
+            // // 如果是移动设备，直接跳转到壁纸页面
+            // if (isMobile) {
+            //     console.log('Mobile device detected, skipping ad and redirecting to wallpapers page');
+            //     window.location.href = 'wallpapers.html';
+            //     event.preventDefault();
+            //     return;
+            // }
             
-            // 创建一个计时器，在一定时间后自动跳转到壁纸页面（如果广告没有正常加载）
-            var adTimeout = setTimeout(function() {
-                window.location.href = 'wallpapers.html';
-            }, 2000); // 2秒后自动跳转
+            // // PC端显示广告
+            // console.log('Desktop device detected, showing ad before redirecting');
             
-            // 保存计时器ID，以便在广告加载成功时清除
-            window.wallpaperAdTimeoutId = adTimeout;
+            // // 创建一个计时器，在一定时间后自动跳转到壁纸页面（如果广告没有正常加载）
+            // var adTimeout = setTimeout(function() {
+            //     window.location.href = 'wallpapers.html';
+            // }, 2000); // 2秒后自动跳转
             
-            // 加载广告脚本
-            var adScript = document.createElement('script');
+            // // 保存计时器ID，以便在广告加载成功时清除
+            // window.wallpaperAdTimeoutId = adTimeout;
             
-            // 使用匿名函数包装广告代码
-            (function(d,z,s){
-                s.src='https://'+d+'/401/'+z;
-                try{
-                    (document.body||document.documentElement).appendChild(s);
-                }catch(e){
-                    console.error('Error loading wallpaper ad:', e);
-                    // 如果广告加载失败，立即跳转到壁纸页面
-                    window.location.href = 'wallpapers.html';
-                }
-            })('groleegni.net',9588029,adScript);
+            // // 加载广告脚本
+            // var adScript = document.createElement('script');
             
-            // 阻止默认行为，由我们控制跳转
-            event.preventDefault();
+            // // 使用匿名函数包装广告代码
+            // (function(d,z,s){
+            //     s.src='https://'+d+'/401/'+z;
+            //     try{
+            //         (document.body||document.documentElement).appendChild(s);
+            //     }catch(e){
+            //         console.error('Error loading wallpaper ad:', e);
+            //         // 如果广告加载失败，立即跳转到壁纸页面
+            //         window.location.href = 'wallpapers.html';
+            //     }
+            // })('groleegni.net',9588029,adScript);
+            
+            // // 阻止默认行为，由我们控制跳转
+            // event.preventDefault();
         }
         
         // 加载开始聊天广告脚本函数
         function loadStartChatAd() {
-            // 创建一个标志，表示广告已经加载
-            window.adLoaded = true;
+            console.log('GrokAni Action: Bypassing start chat ad and initiating chat process.');
+            // 直接开始聊天流程，不再加载广告
+            startChatProcess();
+
+            // // 以下是被屏蔽的广告代码，不再执行
+            // // 创建一个标志，表示广告已经加载
+            // window.adLoaded = true;
             
-            // 创建一个计时器，在一定时间后自动继续聊天流程（如果广告没有正常关闭）
-            var adTimeout = setTimeout(function() {
-                startChatProcess();
-            }, 5000); // 5秒后自动继续
+            // // 创建一个计时器，在一定时间后自动继续聊天流程（如果广告没有正常关闭）
+            // var adTimeout = setTimeout(function() {
+            //     startChatProcess();
+            // }, 5000); // 5秒后自动继续
             
-            // 保存计时器ID，以便在广告关闭时清除
-            window.adTimeoutId = adTimeout;
+            // // 保存计时器ID，以便在广告关闭时清除
+            // window.adTimeoutId = adTimeout;
             
-            // 监听广告关闭事件
-            window.addEventListener('message', function(event) {
-                // 检查消息是否来自广告
-                if (event.data && event.data.adClosed) {
-                    // 清除自动继续的计时器
-                    clearTimeout(window.adTimeoutId);
-                    // 继续聊天流程
-                    startChatProcess();
-                }
-            });
+            // // 监听广告关闭事件
+            // window.addEventListener('message', function(event) {
+            //     // 检查消息是否来自广告
+            //     if (event.data && event.data.adClosed) {
+            //         // 清除自动继续的计时器
+            //         clearTimeout(window.adTimeoutId);
+            //         // 继续聊天流程
+            //         startChatProcess();
+            //     }
+            // });
             
-            // 加载广告脚本
-            var adScript = document.createElement('script');
-            adScript.onload = function() {
-                console.log('Ad script loaded');
-            };
+            // // 加载广告脚本
+            // var adScript = document.createElement('script');
+            // adScript.onload = function() {
+            //     console.log('Ad script loaded');
+            // };
             
-            // 使用匿名函数包装广告代码，以便在移动端也能正常工作
-            (function(d,z,s){
-                s.src='https://'+d+'/401/'+z;
-                try{
-                    (document.body||document.documentElement).appendChild(s);
+            // // 使用匿名函数包装广告代码，以便在移动端也能正常工作
+            // (function(d,z,s){
+            //     s.src='https://'+d+'/401/'+z;
+            //     try{
+            //         (document.body||document.documentElement).appendChild(s);
                     
-                    // 为移动设备添加特殊处理
-                    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                        // 移动设备上可能需要特殊处理
-                        console.log('Mobile device detected, applying special handling');
+            //         // 为移动设备添加特殊处理
+            //         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            //             // 移动设备上可能需要特殊处理
+            //             console.log('Mobile device detected, applying special handling');
                         
-                        // 确保广告容器适应移动屏幕
-                        var adContainers = document.querySelectorAll('.ad-container');
-                        adContainers.forEach(function(container) {
-                            container.style.width = '100%';
-                            container.style.maxWidth = '100vw';
-                            container.style.height = 'auto';
-                        });
-                    }
-                }catch(e){
-                    console.error('Error loading ad:', e);
-                    // 如果广告加载失败，继续聊天流程
-                    startChatProcess();
-                }
-            })('gizokraijaw.net',9588047,adScript);
+            //             // 确保广告容器适应移动屏幕
+            //             var adContainers = document.querySelectorAll('.ad-container');
+            //             adContainers.forEach(function(container) {
+            //                 container.style.width = '100%';
+            //                 container.style.maxWidth = '100vw';
+            //                 container.style.height = 'auto';
+            //             });
+            //         }
+            //     }catch(e){
+            //         console.error('Error loading ad:', e);
+            //         // 如果广告加载失败，继续聊天流程
+            //         startChatProcess();
+            //     }
+            // })('gizokraijaw.net',9588047,adScript);
             
-            console.log('Ad loading initiated');
+            // console.log('Ad loading initiated');
         }
         
         // 开始聊天流程
