@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://grokani.live/</loc>
+        <loc>https://grokani.com/</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://grokani.live/chat.html</loc>
+        <loc>https://grokani.com/chat.html</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://grokani.live/models.html</loc>
+        <loc>https://grokani.com/models.html</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://grokani.live/wallpapers.html</loc>
+        <loc>https://grokani.com/wallpapers.html</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://grokani.live/#features</loc>
+        <loc>https://grokani.com/#features</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://grokani.live/#models</loc>
+        <loc>https://grokani.com/#models</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://grokani.live/#setup</loc>
+        <loc>https://grokani.com/#setup</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://grokani.live/#about</loc>
+        <loc>https://grokani.com/#about</loc>
         <lastmod>2024-07-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
