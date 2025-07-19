@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://grokani.com/sitemap.xml
+Sitemap: https://grokani.live/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
