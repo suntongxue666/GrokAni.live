@@ -24,28 +24,7 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    <url>
-        <loc>https://grokani.live/#features</loc>
-        <lastmod>2024-07-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://grokani.live/#models</loc>
-        <lastmod>2024-07-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://grokani.live/#setup</loc>
-        <lastmod>2024-07-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://grokani.live/#about</loc>
-        <lastmod>2024-07-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
+    <!-- 移除了带有片段标识符的 URL，因为它们都指向主页 -->
+    <!-- 根据谷歌官方文档：https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=zh-cn -->
+    <!-- 片段标识符（#）不应该出现在 sitemap 中，因为它们只是同一页面的不同部分 -->
 </urlset>
