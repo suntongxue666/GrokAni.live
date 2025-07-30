@@ -353,6 +353,16 @@ section {
     margin-top: 3rem;
 }
 
+/* PC端 Why Choose GrokAni 2x2 布局 */
+@media (min-width: 769px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 .feature-card {
     background: var(--gradient-card);
     border: 1px solid var(--card-border);
@@ -393,6 +403,16 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+}
+
+/* PC端 Supported AI Models 2x2 布局 */
+@media (min-width: 769px) {
+    .models-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .model-card {
