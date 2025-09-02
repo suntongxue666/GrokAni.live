@@ -1,9 +1,27 @@
 {
   "version": 2,
-  "routes": [
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "/ads.txt",
-      "dest": "/ads.txt"
+      "source": "/ads.txt",
+      "destination": "/ads.txt"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/ads.txt",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        },
+        {
+          "key": "Content-Type", 
+          "value": "text/plain"
+        }
+      ]
     }
   ]
 }
