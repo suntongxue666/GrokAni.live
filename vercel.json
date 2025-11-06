@@ -3,6 +3,7 @@
   "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
+  "outputDirectory": "apps/stage-web/dist",
   "rewrites": [
     {
       "source": "/ads.txt",
@@ -18,7 +19,7 @@
           "value": "public, max-age=3600"
         },
         {
-          "key": "Content-Type", 
+          "key": "Content-Type",
           "value": "text/plain"
         }
       ]
