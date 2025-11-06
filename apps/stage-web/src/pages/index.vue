@@ -10,6 +10,7 @@ import Header from '../components/Layouts/Header.vue'
 import InteractiveArea from '../components/Layouts/InteractiveArea.vue'
 import MobileInteractiveArea from '../components/Layouts/MobileInteractiveArea.vue'
 import AnimatedWave from '../components/Widgets/AnimatedWave.vue'
+import AdvertisementBanner from '../components/AdvertisementBanner.vue'
 
 import { themeColorFromPropertyOf, useThemeColor } from '../composables/theme-color'
 
@@ -39,6 +40,9 @@ onMounted(() => updateThemeColor())
         : 'color-mix(in srgb, oklch(95% calc(var(--chromatic-chroma-50) * 0.5) var(--chromatic-hue)) 80%, oklch(100% 0 360))'"
     >
       <div relative flex="~ col" z-2 h-100dvh w-100vw of-hidden>
+        <!-- advertisement banner -->
+        <AdvertisementBanner />
+        
         <!-- header -->
         <div class="px-0 py-1 md:px-3 md:py-3" w-full gap-2>
           <Header class="flex" />
